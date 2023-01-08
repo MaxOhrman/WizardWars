@@ -9,6 +9,8 @@ import java.awt.*;
 public class GamePanel extends JPanel {
 
     private int xDelta = 100, yDelta = 100;
+    private int frames = 0;
+    private long lastCheck = 0;
 
     public GamePanel() {
         //Adding listeners for all inputs
@@ -42,6 +44,21 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.fillRect(xDelta,yDelta,200,50);
+
+
+        //          :::::(FPS COUNTER):::::
+        // increment frames everytime we redraw the JPanel
+        // if 1000 ms has passed (1s) we update lastCheck to current time
+        // millis, we display the fps counter (redraws withing 1s)
+        // and then we start to count again by resetting frame counter.
+        frames++;
+        if(System.currentTimeMillis() - lastCheck >= 1000)  {
+            lastCheck = System.currentTimeMillis();
+            System.out.println("FPS: " + frames);
+            frames = 0;
+        }
+
+        //Repaint calls paintComponent and we loop again.
         repaint();
     }
 
