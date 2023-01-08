@@ -2,8 +2,8 @@ package main;
 
 public class Game implements Runnable {
 
-    private GameWindow gameWindow;
-    private GamePanel gamePanel;
+    private final GameWindow gameWindow;
+    private final GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS_SET = 120; //The fps we want the game to run at
     private int frameCount = 0;
@@ -45,7 +45,7 @@ public class Game implements Runnable {
                 gamePanel.repaint();
                 lastFrame = now;
 
-                //Increment frames for the fps counter
+                //Increment frame counter for the fps counter
                 frameCount++;
             }
 
