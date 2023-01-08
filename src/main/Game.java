@@ -10,15 +10,21 @@ public class Game extends Canvas implements Runnable {
     private int frameCount = 0;
     private long lastCheck = 0;
     private boolean isRunning = false;
+    private Handler handler;
 
 
     public Game() {
         this.gamePanel = new GamePanel();
         new GameWindow("Game Demo", this, 1000,563);
         this.gamePanel.setFocusable(true);
+
         // We set focus on the panel, only then can it receive key events(input).
         this.gamePanel.requestFocus();
+
+
         startGameLoop();
+
+        handler = new Handler();
     }
 
     private void startGameLoop() {
@@ -83,9 +89,14 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bufferStrategy.getDrawGraphics();
         //////// We draw things to our game here////////
+        //// graphics objects is added top to bottom ///
 
+        // Render Background (keep this at top)
         g.setColor(Color.red);
         g.fillRect(0,0,1000,563);
+
+        //Render game objects
+        handler.render(g);
 
         ////////////////////////////////////////////////
         g.dispose();
@@ -94,9 +105,12 @@ public class Game extends Canvas implements Runnable {
 
     /**
      * Tick will update at game loops n tickRate
+     *  we update game objects through
+     *  handler.tick() at set tick rate
+     *  of the game
      */
     private void tick() {
-
+        handler.tick();
     }
 
     /**
