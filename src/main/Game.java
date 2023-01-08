@@ -28,14 +28,14 @@ public class Game implements Runnable {
         // 1 second is 1 000 000 000 nanoseconds.
         // We divide it by the desired fps to get how often we want
         // to repaint the scene. timePerFrame is the duration each frame should last
+        // if the desired time has elapsed(timePerFrame) then we draw a new frame
+        // repaint(); use GamePanels paintComponent to suggest it repaint the game scene.
         double timePerFrame = 1000000000.0 / FPS_SET;
         long lastFrame = System.nanoTime();
         long now;
 
         while(true) {
             now = System.nanoTime();
-            // have the desired time elapsed for a new frame to be drawn
-            // repaint(); use GamePanels paintComponent to suggest it repaint the game scene.
             if(now - lastFrame >= timePerFrame) {
                 gamePanel.repaint();
                 lastFrame = now;
