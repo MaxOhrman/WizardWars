@@ -10,7 +10,7 @@ import java.util.Random;
 public class GamePanel extends JPanel {
 
     private float xDelta = 100, yDelta = 100;
-    private float xDir = 0.03f, yDir = 0.03f;
+    private float xDir = 1f, yDir = 1f;
     private int frames = 0;
     private long lastCheck = 0;
     private Color color = new Color(150,20,90);
@@ -38,13 +38,10 @@ public class GamePanel extends JPanel {
         this.yDelta = y;
     }
 
-    // Everytime we use repaint(); paintComponent is suggested to repaint the game scene.
     // paintComponent(Graphics g) is a part of JComponent that JPanel extends
     // PaintComponent is also called when the system thinks it is needed for example:
     // - Minimizing the window and bringing it back
     // - Every resize of the frame containing the panel
-    // This is now a basic game loop looping because repaint() calls paintComponent()
-    // causing a loop that redraws the scene
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -66,8 +63,6 @@ public class GamePanel extends JPanel {
             frames = 0;
         }
 
-        //Repaint calls paintComponent and we loop again.
-        repaint();
     }
 
     private void updateRectangle() {
