@@ -54,13 +54,13 @@ public class GamePanel extends JPanel {
 
     private void updateRectangle() {
         xDelta += xDir;
-        if(xDelta > 400 || xDelta < 0) {
+        if(xDelta > this.getWidth() || xDelta < 0) {
             xDir *= -1;
             color = getRndColor();
         }
 
         yDelta += yDir;
-        if(yDelta > 400 || yDelta < 0) {
+        if(yDelta > this.getHeight() || yDelta < 0) {
             yDir *= -1;
             color = getRndColor();
         }
@@ -72,6 +72,5 @@ public class GamePanel extends JPanel {
         int b = random.nextInt(255);
         return new Color(r,g,b);
     }
-
 
 }

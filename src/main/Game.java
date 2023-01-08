@@ -1,18 +1,20 @@
 package main;
 
-public class Game implements Runnable {
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 
-    private final GameWindow gameWindow;
+public class Game extends Canvas implements Runnable {
+
     private final GamePanel gamePanel;
     private Thread gameThread;
-    private final int FPS_SET = 120; //The fps we want the game to run at
     private int frameCount = 0;
     private long lastCheck = 0;
+    private boolean isRunning = false;
 
 
     public Game() {
         this.gamePanel = new GamePanel();
-        this.gameWindow = new GameWindow("Game Demo", this.gamePanel);
+        new GameWindow("Game Demo", this, 1000,563);
         this.gamePanel.setFocusable(true);
         // We set focus on the panel, only then can it receive key events(input).
         this.gamePanel.requestFocus();
@@ -20,42 +22,85 @@ public class Game implements Runnable {
     }
 
     private void startGameLoop() {
+        isRunning = true;
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    private void stopGameLoop() {
+        isRunning = false;
+        try {
+            gameThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
+     * Game loop
      * run will run at a separate thread
      * 1 second is 1 000 000 000 nanoseconds.
-     * We divide it by the desired fps to get how often we want
-     * to repaint the scene. timePerFrame is the duration each frame should last
-     * if the desired time has elapsed(timePerFrame) then we draw a new frame
-     * repaint(); use GamePanels paintComponent to suggest it repaint the game scene.
+     * We divide it by the desired tick rate to get how often we want
+     * to update objects. If the desired time has elapsed
+     * (timePerFrame) then we create a new tick
+     * We also call render() here which will handle drawing of graphics
      */
     @Override
     public void run() {
 
-        double timePerFrame = 1000000000.0 / FPS_SET;
+        double tickRate = 60.0;
+        double timePerFrame = 1000000000.0 / tickRate;
         long lastFrame = System.nanoTime();
         long now;
 
-        while(true) {
+        while(isRunning) {
             now = System.nanoTime();
             if(now - lastFrame >= timePerFrame) {
-                gamePanel.repaint();
                 lastFrame = now;
+                tick();
 
-                //Increment frame counter for the fps counter
-                frameCount++;
             }
 
+            render();
+            //Increment frame count for the fps counter
+            frameCount++;
             FpsCounter();
         }
+        stopGameLoop();
+    }
 
+    /**
+     * This is where we will render all the graphics
+     * createBufferStrategy will preload n amount of
+     * frames after the current one
+     */
+    private void render() {
+        BufferStrategy bufferStrategy = this.getBufferStrategy();
+        if(bufferStrategy == null) {
+            this.createBufferStrategy(3);
+            return;
+        }
+
+        Graphics g = bufferStrategy.getDrawGraphics();
+        //////// We draw things to our game here////////
+
+        g.setColor(Color.red);
+        g.fillRect(0,0,1000,563);
+
+        ////////////////////////////////////////////////
+        g.dispose();
+        bufferStrategy.show();
+    }
+
+    /**
+     * Tick will update at game loops n tickRate
+     */
+    private void tick() {
 
     }
 
     /**
+     * Fps Counter
      * increment frames everytime we redraw the JPanel
      * if 1000 ms has passed (1s) we update lastCheck to current time
      * millis, we display the fps counter (redraws withing 1s)
