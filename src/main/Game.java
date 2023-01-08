@@ -49,7 +49,7 @@ public class Game implements Runnable {
                 frameCount++;
             }
 
-            runFpsCounter();
+            FpsCounter();
         }
 
 
@@ -61,7 +61,7 @@ public class Game implements Runnable {
      * millis, we display the fps counter (redraws withing 1s)
      * and then we start to count again by resetting frame counter.
      */
-    private void runFpsCounter() {
+    private void FpsCounter() {
         if(System.currentTimeMillis() - lastCheck >= 1000)  {
             lastCheck = System.currentTimeMillis();
             System.out.println("FPS: " + frameCount);
