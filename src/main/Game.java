@@ -1,6 +1,8 @@
 package main;
 
 import entities.Handler;
+import entities.ID;
+import entities.Player;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
@@ -17,6 +19,7 @@ public class Game extends Canvas implements Runnable {
     private final Handler handler;
 
 
+
     public Game() {
         new GameWindow("Game Demo", this, 1000,563);
         handler = new Handler();
@@ -28,6 +31,9 @@ public class Game extends Canvas implements Runnable {
         addMouseMotionListener(mouseInputs);
 
         startGameLoop();
+
+        //Adding objects
+        handler.addObject(new Player(100,100, ID.Player, handler));
     }
 
     private void startGameLoop() {
