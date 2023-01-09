@@ -2,6 +2,10 @@ package main;
 
 import java.awt.*;
 
+/**
+ * This will be the parent of all
+ * gameObjects we create.
+ */
 public abstract class GameObject {
 
     protected int x, y;

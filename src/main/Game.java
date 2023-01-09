@@ -28,8 +28,6 @@ public class Game extends Canvas implements Runnable {
         startGameLoop();
 
         handler = new Handler();
-
-        handler.addObject(new Box(100,100, ID.Crate));
     }
 
     private void startGameLoop() {
