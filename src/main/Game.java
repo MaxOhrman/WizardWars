@@ -29,6 +29,8 @@ public class Game extends Canvas implements Runnable {
         MouseInputs mouseInputs = new MouseInputs(handler);
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
+        setFocusable(true);
+        this.requestFocus();
 
         startGameLoop();
 
