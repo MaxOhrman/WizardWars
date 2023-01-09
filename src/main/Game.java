@@ -1,5 +1,6 @@
 package main;
 
+import entities.Handler;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
@@ -18,16 +19,15 @@ public class Game extends Canvas implements Runnable {
 
     public Game() {
         new GameWindow("Game Demo", this, 1000,563);
+        handler = new Handler();
 
         //Adding listeners for all inputs
-        addKeyListener(new KeyboardInputs(this));
-        MouseInputs mouseInputs = new MouseInputs(this);
+        addKeyListener(new KeyboardInputs(handler));
+        MouseInputs mouseInputs = new MouseInputs(handler);
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
 
         startGameLoop();
-
-        handler = new Handler();
     }
 
     private void startGameLoop() {

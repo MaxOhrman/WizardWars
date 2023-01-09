@@ -1,6 +1,6 @@
 package inputs;
 
-import main.Game;
+import entities.Handler;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,10 +8,10 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
-    private Game gameCanvas;
+    Handler handler;
 
-    public MouseInputs(Game gameCanvas) {
-        this.gameCanvas = gameCanvas;
+    public MouseInputs(Handler handler) {
+        this.handler = handler;
     }
 
     @Override

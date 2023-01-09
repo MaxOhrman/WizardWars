@@ -1,4 +1,4 @@
-package main;
+package entities;
 
 /**
  * The ID Enum will list all game objects
