@@ -1,26 +1,29 @@
 package main;
 
+import inputs.KeyboardInputs;
+import inputs.MouseInputs;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 
-    private final GamePanel gamePanel;
+//    private final GamePanel gamePanel;
     private Thread gameThread;
     private int frameCount = 0;
     private long lastCheck = 0;
     private boolean isRunning = false;
-    private Handler handler;
+    private final Handler handler;
 
 
     public Game() {
-        this.gamePanel = new GamePanel();
         new GameWindow("Game Demo", this, 1000,563);
-        this.gamePanel.setFocusable(true);
 
-        // We set focus on the panel, only then can it receive key events(input).
-        this.gamePanel.requestFocus();
-
+        //Adding listeners for all inputs
+        addKeyListener(new KeyboardInputs(this));
+        MouseInputs mouseInputs = new MouseInputs(this);
+        addMouseListener(mouseInputs);
+        addMouseMotionListener(mouseInputs);
 
         startGameLoop();
 
