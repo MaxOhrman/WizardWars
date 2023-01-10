@@ -1,5 +1,6 @@
 package main;
 
+import entities.Block;
 import entities.Handler;
 import entities.ID;
 import entities.Player;
@@ -8,6 +9,7 @@ import inputs.MouseInputs;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable {
 
@@ -17,8 +19,6 @@ public class Game extends Canvas implements Runnable {
     private long lastCheck = 0;
     private boolean isRunning = false;
     private final Handler handler;
-
-
 
     public Game() {
         new GameWindow("Game Demo", this, 1000,563);
@@ -32,10 +32,12 @@ public class Game extends Canvas implements Runnable {
         setFocusable(true);
         this.requestFocus();
 
-        startGameLoop();
+        //occupy the canvas with objects from level_1.png
+        BufferedImageLoader loader = new BufferedImageLoader();
+        BufferedImage level_1 = loader.loadImage("/level_1.png");
+        loadLevel(level_1);
 
-        //Adding objects
-        handler.addObject(new Player(100,100, ID.Player, handler));
+        startGameLoop();
     }
 
     private void startGameLoop() {
@@ -113,6 +115,43 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bufferStrategy.show();
     }
+
+    /**
+     * Level loading
+     *
+     * pixel is given integer pixel in the
+     * default RGB color model and default sRGB colorspace.
+     *
+     * we extract the different colors and store them
+     * in variables in order to create corresponding objects
+     * we multiply xx and yy by 32 to correctly adjust for
+     * the size of the object we add because xx and yy are pixel
+     * coordinates to avoid overlap
+     *
+     */
+    private void loadLevel(BufferedImage image) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+
+        for(int xx = 0; xx < w; xx++) {
+            for(int yy=0; yy < h; yy++) {
+                int pixel = image.getRGB(xx,yy);
+                int red = (pixel >> 16) & 0xff;
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+                if (red == 255) {
+                    handler.addObject(new Block(xx*32,yy*32, ID.Block));
+                }
+                if(blue == 255) {
+                    handler.addObject(new Player(xx*32,yy*32, ID.Player, handler));
+                }
+
+
+            }
+        }
+    }
+
 
     /**
      * Tick will update at game loops n tickRate
