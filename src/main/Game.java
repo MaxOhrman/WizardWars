@@ -19,6 +19,7 @@ public class Game extends Canvas implements Runnable {
     private long lastCheck = 0;
     private boolean isRunning = false;
     private final Handler handler;
+    private Camera camera;
 
     public Game() {
         new GameWindow("Game Demo", this, 1000,563);
@@ -38,6 +39,7 @@ public class Game extends Canvas implements Runnable {
         loadLevel(level_1);
 
         startGameLoop();
+        camera = new Camera(0,0, this);
     }
 
     private void startGameLoop() {
@@ -101,15 +103,28 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bufferStrategy.getDrawGraphics();
+
+        //Camera following functionality
+        Graphics2D g2d = (Graphics2D) g;
+
+
         //////// We draw things to our game here////////
         //// graphics objects is added top to bottom ///
 
-        // Render Background (keep this at top)
+        // Render Background
         g.setColor(Color.red);
         g.fillRect(0,0,1000,563);
 
+
+        //Camera translation starts (Everything between will be translated)
+        g2d.translate(-camera.getX(), -camera.getY());
+
         //Render game objects
         handler.render(g);
+
+        //Camera translation ends (Everything between will be translated)
+        g2d.translate(-camera.getX(), -camera.getY());
+
 
         ////////////////////////////////////////////////
         g.dispose();
@@ -160,6 +175,15 @@ public class Game extends Canvas implements Runnable {
      *  of the game
      */
     private void tick() {
+
+        //TODO In the future a method that checks a boolean of player exists
+        //TODO Move code to Camera instead with the check and call camera.tick here
+        for (int i=0; i < handler.getObjectArray().size(); i++) {
+            if (handler.getObjectArray().get(i).getId() == ID.Player) {
+                camera.tick(handler.getObjectArray().get(i));
+            }
+        }
+
         handler.tick();
     }
 

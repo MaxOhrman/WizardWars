@@ -16,6 +16,8 @@ public class Handler {
 
     private boolean up = false, down = false, right = false, left = false;
 
+    //TODO Add player exist boolean instead of several loops doing the same in different files
+
     /**
      * Iterate through every GameObject in object
      * and run its tick() method
@@ -82,4 +84,9 @@ public class Handler {
     public void setLeft(boolean left) {
         this.left = left;
     }
+
+    public LinkedList<GameObject> getObjectArray() {
+        return this.object;
+    }
+
 }
