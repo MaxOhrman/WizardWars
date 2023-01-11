@@ -25,14 +25,12 @@ public class Camera {
      */
     public void tick(GameObject object) {
         x += ((object.getX() - x) - game.getWidth()/2f) * 0.3f;
-        System.out.println("X= " + x);
         y += ((object.getY() - y) - game.getHeight()/2f) * 0.3f;
-        System.out.println("y= " + y);
-
 
         /*
         TODO stop camera from moving out of levels
           if (x < = 0) x= 0
+          or maybe we allow it.
          */
 
     }
