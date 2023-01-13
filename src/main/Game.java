@@ -156,10 +156,10 @@ public class Game extends Canvas implements Runnable {
                 int blue = (pixel) & 0xff;
 
                 if (red == 255) {
-                    handler.addObject(new Block(xx*32,yy*32, ID.Block));
+                    handler.addObject(new Block(xx*32,yy*32, 32,32, ID.Block, true));
                 }
                 if(blue == 255) {
-                    handler.addObject(new Player(xx*32,yy*32, ID.Player, handler));
+                    handler.addObject(new Player(xx*32,yy*32, 32, 48, ID.Player, handler, true));
                 }
 
 
@@ -197,7 +197,7 @@ public class Game extends Canvas implements Runnable {
     private void FpsCounter() {
         if(System.currentTimeMillis() - lastCheck >= 1000)  {
             lastCheck = System.currentTimeMillis();
-            System.out.println("FPS: " + frameCount);
+            //System.out.println("FPS: " + frameCount);
             frameCount = 0;
         }
     }
