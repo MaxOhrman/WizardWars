@@ -81,7 +81,7 @@ public class Player extends GameObject{
             if (object.hasCollision && this != object) {
                 if(getBounds().intersects(object.getBounds())) {
 
-                    alterMovement(object);
+                    modifyPosByVelocity(object);
 
                     x += velX * -1;
                     y += velY * -1;
@@ -92,41 +92,37 @@ public class Player extends GameObject{
     }
 
     /**
-     * //
-     *
-     * We find what side this intersects with the object and stop
-     * the directional movement in that direktion by
-     * changing the Handler set direction that
-     * this tick() method uses to set velocity of the player
+     * We find what side this intersects with the object and
+     * adjust the coordinate relative to velocity
      *
      * @param object The object we want to compare our sides too
      */
-    private void alterMovement(GameObject object) {
+    private void modifyPosByVelocity(GameObject object) {
 
-        int distance = 6;
+        int distance = 6; //Defines the range we allow of the matching sides eg -6 to 6.
         int southDistance = object.getBounds().y - (getBounds().y + getBounds().height);
         int northDistance = (getBounds().y) - (object.getBounds().y + object.getBounds().height);
         int westDistance = (object.getBounds().x + object.getBounds().width) - getBounds().x;
         int eastDistance = object.getBounds().x - (getBounds().x + getBounds().width);
 
-        if ((northDistance > -distance) && (northDistance < distance)) {
-            //North side collision
-            handler.setUp(false);
+        //South or North side collision
+        if ((southDistance > -distance) && (southDistance < distance) ||
+            (northDistance > -distance) && (northDistance < distance)) {
+
+            if (handler.isDown()  || handler.isUp() &&
+                handler.isRight() || handler.isLeft()) {
+                x += velX;
+            }
         }
 
-        if ((southDistance > -distance) && (southDistance < distance)) {
-            //South side collision
-            handler.setDown(false);
-        }
+        //West or East side collision
+        if( (westDistance > -distance) && (westDistance < distance) ||
+            (eastDistance > -distance) && (eastDistance < distance) ) {
 
-        if((westDistance > -distance) && (westDistance < distance)) {
-            //West side collision
-            handler.setLeft(false);
-        }
-
-        if((eastDistance > -distance) && (eastDistance < distance)) {
-            //East side collision
-            handler.setRight(false);
+            if (handler.isLeft()  || handler.isRight() &&
+                handler.isUp()    || handler.isDown()) {
+                y += velY;
+            }
         }
 
     }
@@ -152,8 +148,7 @@ public class Player extends GameObject{
      */
     @Override
     public Rectangle getBounds() {
-        int offset = 4;
-
+        int offset = 4; //Increased offset means a smaller collision box relative to object size
         return new Rectangle(x+offset, y+offset, width-(offset*2), height-(offset*2));
     }
 }
