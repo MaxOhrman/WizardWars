@@ -85,6 +85,7 @@ public class Handler {
         this.left = left;
     }
 
+    //Return the array of objects in the game
     public LinkedList<GameObject> getObjectArray() {
         return this.object;
     }
