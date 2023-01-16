@@ -33,6 +33,7 @@ public class Player extends GameObject{
      */
     @Override
     public void tick() {
+        int vel = 5;
         x += velX;
         y += velY;
 
@@ -40,25 +41,25 @@ public class Player extends GameObject{
 
         //Player movement
         if(handler.isUp()) {
-            velY = -5;
+            velY = -vel;
         } else if (!handler.isDown()) {
             velY = 0;
         }
 
         if(handler.isDown()) {
-            velY = 5;
+            velY = vel;
         } else if (!handler.isUp()) {
             velY = 0;
         }
 
         if(handler.isRight()) {
-            velX = 5;
+            velX = vel;
         } else if (!handler.isLeft()) {
             velX = 0;
         }
 
         if(handler.isLeft()) {
-            velX = -5;
+            velX = -vel;
         } else if (!handler.isRight()) {
             velX = 0;
         }
@@ -80,15 +81,10 @@ public class Player extends GameObject{
             if (object.hasCollision && this != object) {
                 if(getBounds().intersects(object.getBounds())) {
 
+                    alterMovement(object);
+
                     x += velX * -1;
                     y += velY * -1;
-
-                    switch (getObjectDirection(object, 6)) {
-                        case "north" -> handler.setUp(false);
-                        case "south" -> handler.setDown(false);
-                        case "west" -> handler.setLeft(false);
-                        case "east" -> handler.setRight(false);
-                    }
 
                 }
             }
@@ -96,39 +92,43 @@ public class Player extends GameObject{
     }
 
     /**
-     * //TODO Add Documentation
-     * @param object
-     * @param distance
-     * @return
+     * //
+     *
+     * We find what side this intersects with the object and stop
+     * the directional movement in that direktion by
+     * changing the Handler set direction that
+     * this tick() method uses to set velocity of the player
+     *
+     * @param object The object we want to compare our sides too
      */
-    private String getObjectDirection(GameObject object, int distance) {
+    private void alterMovement(GameObject object) {
 
-        int southDistance = object.getY() - (this.y + this.height);
-        int northDistance = (this.y + (height % 32)) - (object.getY() + object.height);
-        int westDistance = (object.getX() + object.width) - this.x;
-        int eastDistance = object.getX() - (this.x + this.width);
+        int distance = 6;
+        int southDistance = object.getBounds().y - (getBounds().y + getBounds().height);
+        int northDistance = (getBounds().y) - (object.getBounds().y + object.getBounds().height);
+        int westDistance = (object.getBounds().x + object.getBounds().width) - getBounds().x;
+        int eastDistance = object.getBounds().x - (getBounds().x + getBounds().width);
 
         if ((northDistance > -distance) && (northDistance < distance)) {
-            System.out.println("North");
-            return "north";
+            //North side collision
+            handler.setUp(false);
         }
 
         if ((southDistance > -distance) && (southDistance < distance)) {
-            System.out.println("south");
-            return "south";
+            //South side collision
+            handler.setDown(false);
         }
 
         if((westDistance > -distance) && (westDistance < distance)) {
-            System.out.println("west");
-            return "west";
+            //West side collision
+            handler.setLeft(false);
         }
 
         if((eastDistance > -distance) && (eastDistance < distance)) {
-            System.out.println("east");
-            return "east";
+            //East side collision
+            handler.setRight(false);
         }
 
-        return "null";
     }
 
 
@@ -138,9 +138,22 @@ public class Player extends GameObject{
         g.fillRect(x,y, width, height);
     }
 
+    /**
+     *
+     * We create a rectangle representing the size of
+     * this collision box
+     *
+     * we also offset the start x and y relative to the player
+     * for a smoother experience
+     *
+     * @return the rectangle that we consider is the bounds
+     * of the player
+     *
+     */
     @Override
     public Rectangle getBounds() {
-        int offset = height % 32;
-        return new Rectangle(x,y+offset-1,width,height-offset+1);
+        int offset = 4;
+
+        return new Rectangle(x+offset, y+offset, width-(offset*2), height-(offset*2));
     }
 }
