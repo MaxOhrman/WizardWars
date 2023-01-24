@@ -1,7 +1,6 @@
 package main;
 
 import entities.Block;
-import entities.Handler;
 import entities.ID;
 import entities.Player;
 import inputs.KeyboardInputs;
@@ -161,8 +160,6 @@ public class Game extends Canvas implements Runnable {
                 if(blue == 255) {
                     handler.addObject(new Player(xx*32,yy*32, 32, 64, ID.Player, handler, true));
                 }
-
-
             }
         }
     }
@@ -183,7 +180,6 @@ public class Game extends Canvas implements Runnable {
                 camera.tick(handler.getObjectArray().get(i));
             }
         }
-
         handler.tick();
     }
 

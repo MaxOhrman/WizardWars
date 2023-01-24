@@ -1,5 +1,7 @@
 package entities;
 
+import main.Handler;
+
 import java.awt.*;
 
 public class Player extends GameObject{

@@ -1,4 +1,6 @@
-package entities;
+package main;
+
+import entities.GameObject;
 
 import java.awt.*;
 import java.util.LinkedList;
