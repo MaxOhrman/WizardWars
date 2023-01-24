@@ -1,5 +1,7 @@
 package entities;
 
+import main.ID;
+
 import java.awt.*;
 
 /**
@@ -69,5 +71,17 @@ public abstract class GameObject {
 
     public boolean collisionEnabled() {
         return hasCollision;
+    }
+
+    public boolean isHasCollision() {
+        return hasCollision;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

@@ -1,7 +1,6 @@
 package main;
 
 import entities.Block;
-import entities.ID;
 import entities.Player;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
@@ -23,10 +22,11 @@ public class Game extends Canvas implements Runnable {
     public Game() {
         new GameWindow("Game Demo", this, 1000,563);
         handler = new Handler();
+        camera = new Camera(0,0, this);
 
         //Adding listeners for all inputs
         addKeyListener(new KeyboardInputs(handler));
-        MouseInputs mouseInputs = new MouseInputs(handler);
+        MouseInputs mouseInputs = new MouseInputs(handler, camera);
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
         setFocusable(true);
@@ -38,7 +38,6 @@ public class Game extends Canvas implements Runnable {
         loadLevel(level_1);
 
         startGameLoop();
-        camera = new Camera(0,0, this);
     }
 
     private void startGameLoop() {

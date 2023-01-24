@@ -1,5 +1,7 @@
 package entities;
 
+import main.ID;
+
 import java.awt.*;
 
 public class Block extends GameObject {

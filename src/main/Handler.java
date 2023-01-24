@@ -3,7 +3,7 @@ package main;
 import entities.GameObject;
 
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * The Handlers purpose is to make sure
@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 public class Handler {
 
-    LinkedList<GameObject> object = new LinkedList<>();
+    ArrayList<GameObject> object = new ArrayList<>();
 
     private boolean up = false, down = false, right = false, left = false;
 
@@ -88,7 +88,7 @@ public class Handler {
     }
 
     //Return the array of objects in the game
-    public LinkedList<GameObject> getObjectArray() {
+    public ArrayList<GameObject> getObjectArray() {
         return this.object;
     }
 

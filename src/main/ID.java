@@ -1,4 +1,4 @@
-package entities;
+package main;
 
 /**
  * The ID Enum will list all game objects
@@ -15,7 +15,7 @@ public enum ID {
     Player(),
     Block(),
     Crate(),
-    Bullet(),
+    Projectile(),
     Enemy()
 
 

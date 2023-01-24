@@ -1,6 +1,7 @@
 package entities;
 
 import main.Handler;
+import main.ID;
 
 import java.awt.*;
 
