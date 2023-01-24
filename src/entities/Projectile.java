@@ -4,6 +4,7 @@ import main.Handler;
 import main.ID;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Projectile extends GameObject {
 
@@ -26,6 +27,9 @@ public class Projectile extends GameObject {
     public void tick() {
         x += velX;
         y += velY;
+
+        //Todo add collision detection and delete this if collision
+        //handler.getObjectArray().remove(findThisIndex());
     }
 
     @Override
@@ -37,5 +41,16 @@ public class Projectile extends GameObject {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,8,8);
+    }
+
+    private int findThisIndex() {
+        ArrayList<GameObject> arrayCopy = new ArrayList<>(handler.getObjectArray());
+
+        for(int i =0; i < arrayCopy.size(); i++ ) {
+            if (arrayCopy.get(i).id == this.id) {
+                return i;
+            }
+        }
+        return 0;
     }
 }
