@@ -4,15 +4,17 @@ import main.Handler;
 import main.ID;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Projectile extends GameObject {
 
+    public boolean alive;
     private Handler handler;
 
     public Projectile(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY) {
         super(x, y, width, height, id, enableCollision);
         this.handler = handler;
+        this.alive = true;
 
         //Let's set the Projectile velocity towards the coordinates we clicked
         //Division is the travel time
@@ -28,8 +30,15 @@ public class Projectile extends GameObject {
         x += velX;
         y += velY;
 
-        //Todo add collision detection and delete this if collision
-        //handler.getObjectArray().remove(findThisIndex());
+        Iterator<GameObject> it = handler.getObjectArray().iterator();
+        while (it.hasNext()) {
+            GameObject object = it.next();
+            if(object.hasCollision && this != object && object.getId() != ID.Player) {
+                if(getBounds().intersects(object.getBounds())) {
+                    this.alive = false;
+                }
+            }
+        }
     }
 
     @Override
@@ -43,14 +52,7 @@ public class Projectile extends GameObject {
         return new Rectangle(x,y,8,8);
     }
 
-    private int findThisIndex() {
-        ArrayList<GameObject> arrayCopy = new ArrayList<>(handler.getObjectArray());
-
-        for(int i =0; i < arrayCopy.size(); i++ ) {
-            if (arrayCopy.get(i).id == this.id) {
-                return i;
-            }
-        }
-        return 0;
+    public boolean isAlive() {
+        return this.alive;
     }
 }

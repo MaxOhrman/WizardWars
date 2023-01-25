@@ -3,7 +3,8 @@ package main;
 import entities.GameObject;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * The Handlers purpose is to make sure
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 
 public class Handler {
 
-    ArrayList<GameObject> object = new ArrayList<>();
+    LinkedList<GameObject> object = new LinkedList<>();
+    LinkedList<GameObject> projectiles = new LinkedList<>();
 
     private boolean up = false, down = false, right = false, left = false;
 
@@ -28,6 +30,14 @@ public class Handler {
         for (GameObject tempObject : object) {
             tempObject.tick();
         }
+
+        for (GameObject projectile : projectiles) {
+            projectile.tick();
+            if (!projectile.isAlive()) {
+                projectiles.remove(projectile);
+                break;
+            }
+        }
     }
 
     /**
@@ -35,8 +45,19 @@ public class Handler {
      * and run its render() method
      */
     public void render(Graphics g) {
-        for (GameObject tempObject : object) {
-            tempObject.render(g);
+        Iterator<GameObject> iterator = object.iterator();
+
+        while(iterator.hasNext()) {
+            GameObject object = iterator.next();
+            object.render(g);
+        }
+
+        //Render Projectiles
+        Iterator<GameObject> projectileIterator = projectiles.iterator();
+
+        while(projectileIterator.hasNext()) {
+            GameObject projectile = projectileIterator.next();
+            projectile.render(g);
         }
     }
 
@@ -46,6 +67,10 @@ public class Handler {
      */
     public void addObject(GameObject tempObject) {
         object.add(tempObject);
+    }
+
+    public void addProjectile(GameObject tempObject) {
+        projectiles.add(tempObject);
     }
 
     /**
@@ -88,7 +113,7 @@ public class Handler {
     }
 
     //Return the array of objects in the game
-    public ArrayList<GameObject> getObjectArray() {
+    public LinkedList<GameObject> getObjectArray() {
         return this.object;
     }
 

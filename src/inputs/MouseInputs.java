@@ -43,7 +43,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
             //If player exist
             if(currObject.getId() == ID.Player) {
-                handler.addObject(new Projectile(
+                handler.addProjectile(new Projectile(
                         currObject.getX() + (currObject.getWidth()/2),
                         currObject.getY() + (currObject.getHeight()/2),
                         8,8, ID.Projectile, handler,

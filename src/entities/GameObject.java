@@ -15,6 +15,7 @@ public abstract class GameObject {
     protected ID id;
     protected boolean hasCollision;
     protected int width, height;
+    protected boolean isAlive;
 
     public GameObject(int x, int y, int width, int height, ID id, boolean enableCollision) {
         this.x = x;
@@ -23,6 +24,7 @@ public abstract class GameObject {
         this.height = height;
         this.id = id;
         this.hasCollision = enableCollision;
+        this.isAlive = false;
     }
 
     public abstract void tick();
@@ -83,5 +85,13 @@ public abstract class GameObject {
 
     public int getHeight() {
         return height;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }
