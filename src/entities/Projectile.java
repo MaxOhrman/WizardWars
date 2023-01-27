@@ -33,7 +33,7 @@ public class Projectile extends GameObject {
         Iterator<GameObject> it = handler.getObjectArray().iterator();
         while (it.hasNext()) {
             GameObject object = it.next();
-            if(object.hasCollision && this != object && object.getId() != ID.Player) {
+            if(object.hasCollision && this != object) {
                 if(getBounds().intersects(object.getBounds())) {
                     this.alive = false;
                 }
