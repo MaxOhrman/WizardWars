@@ -157,7 +157,8 @@ public class Game extends Canvas implements Runnable {
                     handler.addObject(new Block(xx*32,yy*32, 32,32, ID.Block, true));
                 }
                 if(blue == 255) {
-                    handler.addObject(new Player(xx*32,yy*32, 32, 64, ID.Player, handler, true));
+//                    handler.addObject(new Player(xx*32,yy*32, 32, 64, ID.Player, handler, true));
+                    handler.addPlayer(new Player(xx*32,yy*32, 32, 64, ID.Player, handler, true));
                 }
             }
         }
@@ -172,13 +173,12 @@ public class Game extends Canvas implements Runnable {
      */
     private void tick() {
 
-        //TODO In the future a method that checks a boolean of player exists
         //TODO Move code to Camera instead with the check and call camera.tick here
-        for (int i=0; i < handler.getObjectArray().size(); i++) {
-            if (handler.getObjectArray().get(i).getId() == ID.Player) {
-                camera.tick(handler.getObjectArray().get(i));
-            }
+
+        if(handler.playerExist()) {
+            camera.tick(handler.getPlayer());
         }
+
         handler.tick();
     }
 
@@ -192,6 +192,7 @@ public class Game extends Canvas implements Runnable {
     private void FpsCounter() {
         if(System.currentTimeMillis() - lastCheck >= 1000)  {
             lastCheck = System.currentTimeMillis();
+            //TODO ADD FPS COUNTER IN-GAME
             //System.out.println("FPS: " + frameCount);
             frameCount = 0;
         }

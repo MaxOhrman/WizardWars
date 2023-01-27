@@ -1,6 +1,7 @@
 package main;
 
 import entities.GameObject;
+import entities.Player;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ public class Handler {
 
     LinkedList<GameObject> object = new LinkedList<>();
     LinkedList<GameObject> projectiles = new LinkedList<>();
+    private Player player = null;
 
     private boolean up = false, down = false, right = false, left = false;
 
@@ -27,16 +29,23 @@ public class Handler {
      * and run its tick() method
      */
     public void tick() {
+        //Tick for objects
         for (GameObject tempObject : object) {
             tempObject.tick();
         }
 
+        //Tick for projectiles
         for (GameObject projectile : projectiles) {
             projectile.tick();
             if (!projectile.isAlive()) {
                 projectiles.remove(projectile);
                 break;
             }
+        }
+
+        //Tick for player
+        if (this.player != null) {
+            player.tick();
         }
     }
 
@@ -45,6 +54,7 @@ public class Handler {
      * and run its render() method
      */
     public void render(Graphics g) {
+        //Render for objects
         Iterator<GameObject> iterator = object.iterator();
 
         while(iterator.hasNext()) {
@@ -59,6 +69,11 @@ public class Handler {
             GameObject projectile = projectileIterator.next();
             projectile.render(g);
         }
+
+        //Tick for player
+        if (this.player != null) {
+            player.render(g);
+        }
     }
 
     /**
@@ -67,6 +82,18 @@ public class Handler {
      */
     public void addObject(GameObject tempObject) {
         object.add(tempObject);
+    }
+
+    public void addPlayer(Player player) {
+        this.player = player;
+    }
+
+    public boolean playerExist() {
+        return player != null;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void addProjectile(GameObject tempObject) {
