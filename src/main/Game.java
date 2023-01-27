@@ -17,7 +17,7 @@ public class Game extends Canvas implements Runnable {
     private long lastCheck = 0;
     private boolean isRunning = false;
     private final Handler handler;
-    private Camera camera;
+    private final Camera camera;
 
     public Game() {
         new GameWindow("Game Demo", this, 1000,563);
