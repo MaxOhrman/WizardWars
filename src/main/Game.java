@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable {
     private final Camera camera;
 
     public Game() {
-        new GameWindow("Game Demo", this, 1000,563);
+        new GameWindow("A war of wizards", this, 1000,563);
         handler = new Handler();
         camera = new Camera(0,0, this);
 

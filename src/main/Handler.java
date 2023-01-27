@@ -70,7 +70,7 @@ public class Handler {
             projectile.render(g);
         }
 
-        //Tick for player
+        //Render for player
         if (this.player != null) {
             player.render(g);
         }
