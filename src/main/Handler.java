@@ -16,8 +16,8 @@ import java.util.LinkedList;
 
 public class Handler {
 
-    LinkedList<GameObject> object = new LinkedList<>();
-    LinkedList<GameObject> projectiles = new LinkedList<>();
+    private LinkedList<GameObject> object = new LinkedList<>();
+    private LinkedList<GameObject> projectiles = new LinkedList<>();
     private Player player = null;
 
     private boolean up = false, down = false, right = false, left = false;
@@ -76,10 +76,6 @@ public class Handler {
         }
     }
 
-    /**
-     * Adding a object to our list of objects that
-     * for handling
-     */
     public void addObject(GameObject tempObject) {
         object.add(tempObject);
     }
@@ -100,9 +96,6 @@ public class Handler {
         projectiles.add(tempObject);
     }
 
-    /**
-     * Removing object from our list of objects
-     */
     public void removeObject(GameObject tempObject) {
         object.remove(tempObject);
     }
