@@ -1,5 +1,6 @@
 package entities;
 
+import main.Exhaust;
 import main.Handler;
 import main.ID;
 
@@ -8,11 +9,14 @@ import java.awt.*;
 public class Player extends GameObject{
 
     Handler handler;
+    Exhaust exhausted;
+
 
 
     public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision) {
         super(x, y, width, height, id, enableCollision);
         this.handler = handler;
+        this.exhausted = new Exhaust(600);
     }
 
     /**
@@ -129,6 +133,17 @@ public class Player extends GameObject{
             }
         }
 
+    }
+
+    public void castSpell(int mouseX, int mouseY) {
+        if(!exhausted.isExhausted()) {
+            handler.addProjectile(new Projectile(
+                    x + (getWidth()/2),
+                    y + (getWidth()/2),
+                    8,8, ID.Projectile, handler,
+                    false, mouseX, mouseY));
+            exhausted.setExhausted();
+        }
     }
 
 

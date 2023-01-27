@@ -1,9 +1,7 @@
 package inputs;
 
-import entities.Projectile;
 import main.Camera;
 import main.Handler;
-import main.ID;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -36,13 +34,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         int mouseY = (int) (e.getY() + camera.getY());
 
 
-            if (handler.playerExist()) {
-                handler.addProjectile(new Projectile(
-                        handler.getPlayer().getX() + (handler.getPlayer().getWidth()/2),
-                        handler.getPlayer().getY() + (handler.getPlayer().getHeight()/2),
-                        8,8, ID.Projectile, handler,
-                        false, mouseX, mouseY));
-            }
+        if (handler.playerExist()) {
+            handler.getPlayer().castSpell(mouseX,mouseY);
+        }
     }
 
     @Override

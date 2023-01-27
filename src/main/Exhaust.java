@@ -17,6 +17,7 @@ public class Exhaust {
 
     public Exhaust(long exhaustTimeMs) {
         this.exhaustTime = exhaustTimeMs;
+        this.exhausted = false;
     }
 
 
