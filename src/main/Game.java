@@ -250,10 +250,23 @@ public class Game extends Canvas implements Runnable {
                 }
 
                 //:::::::: Foliage 10-X::::::::
-                //Big Tree Green:10
+                //BigTree NW: 10
+                //BigTree NE: 20
+                //BigTree SW: 30
+                //BigTree SE: 40
                 if (green == 10) {
-                    handler.addObject(new BigTree(xx*32,yy*32, 64,64, ID.BigTree, true, spriteSheet));
+                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_NW, true, spriteSheet));
                 }
+                if (green == 20) {
+                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_NE, true, spriteSheet));
+                }
+                if (green == 30) {
+                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_SW, true, spriteSheet));
+                }
+                if (green == 40) {
+                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_SE, true, spriteSheet));
+                }
+
 
 
                 //Adding outer wall
