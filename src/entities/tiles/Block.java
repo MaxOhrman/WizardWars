@@ -20,7 +20,7 @@ public class Block extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(x,y,width,height);
+        g.fillRect(x, y, width, height);
     }
 
     @Override

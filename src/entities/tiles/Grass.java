@@ -14,9 +14,9 @@ public class Grass extends GameObject {
 
     public Grass(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
         super(x, y, width, height, id, enableCollision, spriteSheet);
-        grass_sprites.add(spriteSheet.getSprite(1,10,32,32));
-        grass_sprites.add(spriteSheet.getSprite(2,10,32,32));
-        grass_sprites.add(spriteSheet.getSprite(3,10,32,32));
+        grass_sprites.add(spriteSheet.getSprite(1, 10, 32, 32));
+        grass_sprites.add(spriteSheet.getSprite(2, 10, 32, 32));
+        grass_sprites.add(spriteSheet.getSprite(3, 10, 32, 32));
 
     }
 
@@ -27,13 +27,13 @@ public class Grass extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        if(this.id == ID.Grass_0) {
+        if (this.id == ID.Grass_0) {
             g.drawImage(grass_sprites.get(0), x, y, null);
         }
-        if(this.id == ID.Grass_1) {
+        if (this.id == ID.Grass_1) {
             g.drawImage(grass_sprites.get(1), x, y, null);
         }
-        if(this.id == ID.Grass_2) {
+        if (this.id == ID.Grass_2) {
             g.drawImage(grass_sprites.get(2), x, y, null);
         }
     }

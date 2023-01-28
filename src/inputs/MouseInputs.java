@@ -33,12 +33,12 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         //Getting the position of the mouse doesn't translate
         //the correct position of our mouse
         //We need to add the coordinates relative to the game canvas
-        int mouseX = e.getX()-(game.getWidth()/2)+64;
-        int mouseY = e.getY()-(game.getHeight()/2)+64;
+        int mouseX = e.getX() - (game.getWidth() / 2) + 64;
+        int mouseY = e.getY() - (game.getHeight() / 2) + 64;
 
 
         if (handler.playerExist()) {
-            handler.getPlayer().castSpell(mouseX,mouseY);
+            handler.getPlayer().castSpell(mouseX, mouseY);
         }
     }
 

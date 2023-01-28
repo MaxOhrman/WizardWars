@@ -4,10 +4,10 @@ public class Exhaust {
     /**
      * We want players and monsters to have delays between
      * shooting/casting projectiles
-     *
+     * <p>
      * We use setExhausted() when shooting to
      * set the time when something was cast
-     *
+     * <p>
      * we use isExhausted() to see if we can cast.
      */
     private long castTime;
@@ -23,7 +23,7 @@ public class Exhaust {
 
     private void checkTimer() {
         setTimeNow();
-        if((timeNow - castTime) > exhaustTime) {
+        if ((timeNow - castTime) > exhaustTime) {
             exhausted = false;
         }
     }

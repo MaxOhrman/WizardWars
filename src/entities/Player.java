@@ -5,7 +5,7 @@ import main.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Player extends GameObject{
+public class Player extends GameObject {
 
     Handler handler;
     Exhaust exhausted;
@@ -14,35 +14,32 @@ public class Player extends GameObject{
     Game game;
 
 
-
-
     public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet, Game game) {
         super(x, y, width, height, id, enableCollision, spriteSheet);
         this.handler = handler;
         this.exhausted = new Exhaust(600);
         this.spriteSheet = spriteSheet;
-        this.player_sprite = spriteSheet.getSprite(1,1,32,32);
+        this.player_sprite = spriteSheet.getSprite(1, 1, 32, 32);
         this.game = game;
     }
 
     /**
      * Player Movement
-     *
+     * <p>
      * Handler has a set of booleans this
      * code acts upon. Those booleans are
      * controlled by the methods keyPressed
      * and keyReleased in KeyboardInputs class
-     *
+     * <p>
      * The following code is written in a way
      * to smoothen the Player movement
-     *
+     * <p>
      * example: w/up is held down.
      * As soon as we release it
      * else if (!handler.isDown())
      * becomes true at the next tick
      * we set our velocity in that
      * direction to 0.
-     *
      */
     @Override
     public void tick() {
@@ -53,25 +50,25 @@ public class Player extends GameObject{
         collision();
 
         //Player movement
-        if(handler.isUp()) {
+        if (handler.isUp()) {
             velY = -vel;
         } else if (!handler.isDown()) {
             velY = 0;
         }
 
-        if(handler.isDown()) {
+        if (handler.isDown()) {
             velY = vel;
         } else if (!handler.isUp()) {
             velY = 0;
         }
 
-        if(handler.isRight()) {
+        if (handler.isRight()) {
             velX = vel;
         } else if (!handler.isLeft()) {
             velX = 0;
         }
 
-        if(handler.isLeft()) {
+        if (handler.isLeft()) {
             velX = -vel;
         } else if (!handler.isRight()) {
             velX = 0;
@@ -82,17 +79,17 @@ public class Player extends GameObject{
      * We iterate through every object added to the level
      * and if our objects Rectangle intersect with any
      * item in the array of objects we have a collision
-     *
+     * <p>
      * We try to smoothen out movements against walls using
      * getObjectDirection method to stop movement in
      * the direction of the object we are getting stuck on
      */
     private void collision() {
-        for(int i = 0; i < handler.getObjectArray().size(); i++) {
+        for (int i = 0; i < handler.getObjectArray().size(); i++) {
             GameObject object = handler.getObjectArray().get(i);
 
             if (object.hasCollision) {
-                if(getBounds().intersects(object.getBounds())) {
+                if (getBounds().intersects(object.getBounds())) {
 
                     modifyPosByVelocity(object);
 
@@ -121,20 +118,20 @@ public class Player extends GameObject{
 
         //South or North side collision
         if ((southDistance > -distance) && (southDistance < distance) ||
-            (northDistance > -distance) && (northDistance < distance)) {
+                (northDistance > -distance) && (northDistance < distance)) {
 
-            if (handler.isDown()  || handler.isUp() &&
-                handler.isRight() || handler.isLeft()) {
+            if (handler.isDown() || handler.isUp() &&
+                    handler.isRight() || handler.isLeft()) {
                 x += velX;
             }
         }
 
         //West or East side collision
-        if( (westDistance > -distance) && (westDistance < distance) ||
-            (eastDistance > -distance) && (eastDistance < distance) ) {
+        if ((westDistance > -distance) && (westDistance < distance) ||
+                (eastDistance > -distance) && (eastDistance < distance)) {
 
-            if (handler.isLeft()  || handler.isRight() &&
-                handler.isUp()    || handler.isDown()) {
+            if (handler.isLeft() || handler.isRight() &&
+                    handler.isUp() || handler.isDown()) {
                 y += velY;
             }
         }
@@ -142,11 +139,11 @@ public class Player extends GameObject{
     }
 
     public void castSpell(int mouseX, int mouseY) {
-        if(!exhausted.isExhausted()) {
+        if (!exhausted.isExhausted()) {
             handler.addProjectile(new Projectile(
-                    x + (getWidth()/2),
-                    y + (getWidth()/2),
-                    8,8, ID.Projectile, handler,
+                    x + (getWidth() / 2),
+                    y + (getWidth() / 2),
+                    8, 8, ID.Projectile, handler,
                     false, mouseX, mouseY, spriteSheet));
             exhausted.setExhausted();
         }
@@ -155,25 +152,23 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(player_sprite, x, y,null);
+        g.drawImage(player_sprite, x, y, null);
 
     }
 
     /**
-     *
      * We create a rectangle representing the size of
      * this collision box
-     *
+     * <p>
      * we also offset the start x and y relative to the player
      * for a smoother experience
      *
      * @return the rectangle that we consider is the bounds
      * of the player
-     *
      */
     @Override
     public Rectangle getBounds() {
         int offset = 4; //Increased offset means a smaller collision box relative to object size
-        return new Rectangle(x+offset, y+offset, width-(offset*2), height-(offset*2));
+        return new Rectangle(x + offset, y + offset, width - (offset * 2), height - (offset * 2));
     }
 }

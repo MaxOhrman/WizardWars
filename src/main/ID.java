@@ -3,12 +3,11 @@ package main;
 /**
  * The ID Enum will list all game objects
  * of our game.
- *
+ * <p>
  * Whenever we create object
  * we will also give it an appropriate id
  * from enum ID. This is needed to identify
  * gameObjects from one another
- *
  */
 
 public enum ID {
@@ -48,8 +47,6 @@ public enum ID {
     BigTree_NW,
     BigTree_SE,
     BigTree_SW
-
-
 
 
 }

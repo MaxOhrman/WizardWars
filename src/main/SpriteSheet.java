@@ -18,7 +18,7 @@ public class SpriteSheet {
 
     //This way we can select what column and row we want to add a sprite from
     public BufferedImage getSprite(int col, int row, int width, int height) {
-        return image.getSubimage((col*32)-32, (row*32)-32, width, height);
+        return image.getSubimage((col * 32) - 32, (row * 32) - 32, width, height);
     }
 
 

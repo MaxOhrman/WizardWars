@@ -10,15 +10,13 @@ public class GameWindow {
 
         //Creating the frame
         this.frame = new JFrame(title);
-        frame.setPreferredSize(new Dimension(width,height));
-        frame.setMinimumSize(new Dimension(width,height));
-        frame.setMinimumSize(new Dimension(width,height));
+        frame.setPreferredSize(new Dimension(width, height));
+        frame.setMinimumSize(new Dimension(width, height));
+        frame.setMinimumSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(game);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null); //Create the frame in the center of the screen
         frame.setVisible(true);
-
-
     }
 }

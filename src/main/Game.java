@@ -14,21 +14,21 @@ import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable {
 
-//    private final GamePanel gamePanel;
+    private final Handler handler;
+    private final Camera camera;
+    //    private final GamePanel gamePanel;
     private Thread gameThread;
     private int frameCount = 0;
     private long lastCheck = 0;
     private boolean isRunning = false;
-    private final Handler handler;
-    private final Camera camera;
-    private SpriteSheet spriteSheet;
+    private final SpriteSheet spriteSheet;
 
-    private BufferedImage buffered_sprite_sheet;
+    private final BufferedImage buffered_sprite_sheet;
 
     public Game() {
-        new GameWindow("A war of wizards", this, 1920,1080);
+        new GameWindow("A war of wizards", this, 1920, 1080);
         handler = new Handler();
-        camera = new Camera(0,0, this);
+        camera = new Camera(0, 0, this);
 
         //Adding listeners for all inputs
         addKeyListener(new KeyboardInputs(handler));
@@ -49,6 +49,10 @@ public class Game extends Canvas implements Runnable {
         loadLevel(level_1);
 
         startGameLoop();
+    }
+
+    public static void main(String[] args) {
+        Game game = new Game();
     }
 
     private void startGameLoop() {
@@ -83,9 +87,9 @@ public class Game extends Canvas implements Runnable {
         long lastFrame = System.nanoTime();
         long now;
 
-        while(isRunning) {
+        while (isRunning) {
             now = System.nanoTime();
-            if(now - lastFrame >= timePerFrame) {
+            if (now - lastFrame >= timePerFrame) {
                 lastFrame = now;
                 tick();
 
@@ -106,7 +110,7 @@ public class Game extends Canvas implements Runnable {
      */
     private void render() {
         BufferStrategy bufferStrategy = this.getBufferStrategy();
-        if(bufferStrategy == null) {
+        if (bufferStrategy == null) {
             this.createBufferStrategy(3);
             return;
         }
@@ -122,7 +126,7 @@ public class Game extends Canvas implements Runnable {
 
         // Render Background
         g.setColor(Color.red);
-        g.fillRect(0,0,4000,4000);
+        g.fillRect(0, 0, 4000, 4000);
 
 
         //Camera translation starts (Everything between will be translated)
@@ -130,7 +134,7 @@ public class Game extends Canvas implements Runnable {
 
 
         //Scale objects 4 times bigger
-        g2d.scale(4.0,4.0);
+        g2d.scale(4.0, 4.0);
 
         //Render game objects
         handler.render(g);
@@ -140,7 +144,6 @@ public class Game extends Canvas implements Runnable {
         g2d.translate(-camera.getX(), -camera.getY());
 
 
-
         ////////////////////////////////////////////////
         g.dispose();
         bufferStrategy.show();
@@ -148,37 +151,36 @@ public class Game extends Canvas implements Runnable {
 
     /**
      * Level loading
-     *
+     * <p>
      * pixel is given integer pixel in the
      * default RGB color model and default sRGB colorspace.
-     *
+     * <p>
      * we extract the different colors and store them
      * in variables in order to create corresponding objects
      * we multiply xx and yy by 32 to correctly adjust for
      * the size of the object we add because xx and yy are pixel
      * coordinates to avoid overlap
-     *
      */
     private void loadLevel(BufferedImage image) {
         int w = image.getWidth();
         int h = image.getHeight();
 
-        for(int xx = 0; xx < w; xx++) {
-            for(int yy=0; yy < h; yy++) {
-                int pixel = image.getRGB(xx,yy);
+        for (int xx = 0; xx < w; xx++) {
+            for (int yy = 0; yy < h; yy++) {
+                int pixel = image.getRGB(xx, yy);
                 int red = (pixel >> 16) & 0xff;
                 int green = (pixel >> 8) & 0xff;
                 int blue = (pixel) & 0xff;
 
                 //:::::::: GRASS ::::::::
                 if (green == 255) {
-                    handler.addObject(new Grass(xx*32,yy*32, 32,32, ID.Grass_0, false, spriteSheet));
+                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_0, false, spriteSheet));
                 }
                 if (green == 254) {
-                    handler.addObject(new Grass(xx*32,yy*32, 32,32, ID.Grass_1, false, spriteSheet));
+                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_1, false, spriteSheet));
                 }
                 if (green == 253) {
-                    handler.addObject(new Grass(xx*32,yy*32, 32,32, ID.Grass_2, false, spriteSheet));
+                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_2, false, spriteSheet));
                 }
 
                 //:::::::: Dirt ::::::::
@@ -187,13 +189,13 @@ public class Game extends Canvas implements Runnable {
                 //d1: 155
                 //d2: 145
                 if (red == 165) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_0, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_0, false, spriteSheet));
                 }
                 if (red == 155) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_1, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_1, false, spriteSheet));
                 }
                 if (red == 145) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_2, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_2, false, spriteSheet));
                 }
 
                 // borders
@@ -203,16 +205,16 @@ public class Game extends Canvas implements Runnable {
                 //s: 120
 
                 if (blue == 135) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_N, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_N, false, spriteSheet));
                 }
                 if (blue == 130) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_W, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_W, false, spriteSheet));
                 }
                 if (blue == 125) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_E, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_E, false, spriteSheet));
                 }
                 if (blue == 120) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_S, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_S, false, spriteSheet));
                 }
 
                 //ne: 115
@@ -220,16 +222,16 @@ public class Game extends Canvas implements Runnable {
                 //se: 105
                 //sw: 100
                 if (blue == 115) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_NE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_NE, false, spriteSheet));
                 }
                 if (blue == 110) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_NW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_NW, false, spriteSheet));
                 }
                 if (blue == 105) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_SE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_SE, false, spriteSheet));
                 }
                 if (blue == 100) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_SW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_SW, false, spriteSheet));
                 }
 
                 //Inner_NE: 95
@@ -237,16 +239,16 @@ public class Game extends Canvas implements Runnable {
                 //Inner_SE: 85
                 //Inner_SW: 80
                 if (blue == 95) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_NE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_NE, false, spriteSheet));
                 }
                 if (blue == 90) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_NW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_NW, false, spriteSheet));
                 }
                 if (blue == 85) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_SE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_SE, false, spriteSheet));
                 }
                 if (blue == 80) {
-                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_SW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_SW, false, spriteSheet));
                 }
 
                 //:::::::: Foliage 10-X::::::::
@@ -255,43 +257,41 @@ public class Game extends Canvas implements Runnable {
                 //BigTree SW: 30
                 //BigTree SE: 40
                 if (green == 10) {
-                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_NW, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_NW, true, spriteSheet));
                 }
                 if (green == 20) {
-                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_NE, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_NE, true, spriteSheet));
                 }
                 if (green == 30) {
-                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_SW, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SW, true, spriteSheet));
                 }
                 if (green == 40) {
-                    handler.addObject(new BigTree(xx*32,yy*32, 32,32, ID.BigTree_SE, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SE, true, spriteSheet));
                 }
-
 
 
                 //Adding outer wall
                 if (red == 255) {
-                    handler.addObject(new Block(xx*32,yy*32, 32,32, ID.Block, true, spriteSheet));
+                    handler.addObject(new Block(xx * 32, yy * 32, 32, 32, ID.Block, true, spriteSheet));
                 }
 
                 //Adding the player last
-                handler.addPlayer(new Player(3*32,3*32, 32, 32, ID.Player, handler, true, spriteSheet, this));
+                handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, this));
             }
         }
     }
 
-
     /**
      * Tick will update at game loops n tickRate
-     *  we update game objects through
-     *  handler.tick() at set tick rate
-     *  of the game
+     * we update game objects through
+     * handler.tick() at set tick rate
+     * of the game
      */
     private void tick() {
 
         //TODO Move code to Camera instead with the check and call camera.tick here
 
-        if(handler.playerExist()) {
+        if (handler.playerExist()) {
             camera.tick(handler.getPlayer());
         }
 
@@ -306,17 +306,11 @@ public class Game extends Canvas implements Runnable {
      * and then we start to count again by resetting frame counter.
      */
     private void FpsCounter() {
-        if(System.currentTimeMillis() - lastCheck >= 1000)  {
+        if (System.currentTimeMillis() - lastCheck >= 1000) {
             lastCheck = System.currentTimeMillis();
             //TODO ADD FPS COUNTER IN-GAME
             //System.out.println("FPS: " + frameCount);
             frameCount = 0;
         }
     }
-
-    public static void main(String[] args) {
-        Game game = new Game();
-    }
-
-
 }

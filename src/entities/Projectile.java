@@ -9,7 +9,7 @@ import java.awt.*;
 public class Projectile extends GameObject {
 
     public boolean alive;
-    private Handler handler;
+    private final Handler handler;
 
     public Projectile(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY, SpriteSheet spriteSheet) {
         super(x, y, width, height, id, enableCollision, spriteSheet);
@@ -21,8 +21,8 @@ public class Projectile extends GameObject {
         int speed = 6;
 
         double projectileDir = Math.toDegrees(Math.atan2(mouseY, mouseX));
-        velX = (float)(Math.cos(Math.toRadians(projectileDir))*speed);
-        velY = (float)(Math.sin(Math.toRadians(projectileDir ))*speed);
+        velX = (float) (Math.cos(Math.toRadians(projectileDir)) * speed);
+        velY = (float) (Math.sin(Math.toRadians(projectileDir)) * speed);
     }
 
     @Override
@@ -43,12 +43,12 @@ public class Projectile extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.green);
-        g.fillOval(x,y,8,8);
+        g.fillOval(x, y, 8, 8);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,8,8);
+        return new Rectangle(x, y, 8, 8);
     }
 
     public boolean isAlive() {

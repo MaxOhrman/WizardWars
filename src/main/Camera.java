@@ -15,10 +15,10 @@ public class Camera {
 
     /**
      * Lock coordinates onto our character
-     *  we take the Players x and y coordinates
-     *  and decrease them by half the screen size
-     *  to center the camera on the player
-     *
+     * we take the Players x and y coordinates
+     * and decrease them by half the screen size
+     * to center the camera on the player
+     * <p>
      * we smoothen the screen by adding a partial of
      * the preferred Camera x/y position each tick
      * to "zoom" in on the player
@@ -28,8 +28,8 @@ public class Camera {
 //        y += ((object.getY() - y) - game.getHeight()/2f) * 0.3f;
 
 
-        x = ((object.getX()+32)*4f) - 1920/2f;
-        y = ((object.getY()+32)*4f) - 1009/2f;
+        x = ((object.getX() + 32) * 4f) - 1920 / 2f;
+        y = ((object.getY() + 32) * 4f) - 1009 / 2f;
 
         /*
         TODO stop camera from moving out of levels

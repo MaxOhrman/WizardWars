@@ -15,8 +15,8 @@ import java.util.LinkedList;
 
 public class Handler {
 
-    private LinkedList<GameObject> object = new LinkedList<>();
-    private LinkedList<GameObject> projectiles = new LinkedList<>();
+    private final LinkedList<GameObject> object = new LinkedList<>();
+    private final LinkedList<GameObject> projectiles = new LinkedList<>();
     private Player player = null;
 
     private boolean up = false, down = false, right = false, left = false;
@@ -39,7 +39,7 @@ public class Handler {
                 projectiles.remove(projectile);
                 break;
             }
-            if(projectile.isAlive()) {
+            if (projectile.isAlive()) {
                 projectile.tick();
                 break;
             }
