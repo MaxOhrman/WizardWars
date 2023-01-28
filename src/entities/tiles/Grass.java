@@ -14,10 +14,10 @@ public class Grass extends GameObject {
 
     public Grass(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
         super(x, y, width, height, id, enableCollision, spriteSheet);
+
         grass_sprites.add(spriteSheet.getSprite(1, 10, 32, 32));
         grass_sprites.add(spriteSheet.getSprite(2, 10, 32, 32));
         grass_sprites.add(spriteSheet.getSprite(3, 10, 32, 32));
-
     }
 
     @Override

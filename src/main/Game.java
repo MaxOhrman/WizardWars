@@ -16,23 +16,20 @@ public class Game extends Canvas implements Runnable {
 
     private final Handler handler;
     private final Camera camera;
-    //    private final GamePanel gamePanel;
     private Thread gameThread;
     private int frameCount = 0;
     private long lastCheck = 0;
     private boolean isRunning = false;
     private final SpriteSheet spriteSheet;
 
-    private final BufferedImage buffered_sprite_sheet;
-
     public Game() {
         new GameWindow("A war of wizards", this, 1920, 1080);
         handler = new Handler();
-        camera = new Camera(0, 0, this);
+        camera = new Camera(0, 0);
 
         //Adding listeners for all inputs
         addKeyListener(new KeyboardInputs(handler));
-        MouseInputs mouseInputs = new MouseInputs(handler, camera, this);
+        MouseInputs mouseInputs = new MouseInputs(handler, this);
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
         setFocusable(true);
@@ -43,7 +40,7 @@ public class Game extends Canvas implements Runnable {
         BufferedImage level_1 = loader.loadImage("/level_1.png");
 
         //Load in sprites as BufferedImage then we create SpriteSheet
-        buffered_sprite_sheet = loader.loadImage("/sprites.png");
+        BufferedImage buffered_sprite_sheet = loader.loadImage("/sprites.png");
         spriteSheet = new SpriteSheet(buffered_sprite_sheet);
 
         loadLevel(level_1);

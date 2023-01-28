@@ -1,6 +1,5 @@
 package inputs;
 
-import main.Camera;
 import main.Game;
 import main.Handler;
 
@@ -11,12 +10,10 @@ import java.awt.event.MouseMotionListener;
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private final Handler handler;
-    private final Camera camera;
     Game game;
 
-    public MouseInputs(Handler handler, Camera camera, Game game) {
+    public MouseInputs(Handler handler, Game game) {
         this.handler = handler;
-        this.camera = camera;
         this.game = game;
     }
 
