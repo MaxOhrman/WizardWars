@@ -18,7 +18,7 @@ public class Projectile extends GameObject {
 
         //Let's set the Projectile velocity towards the coordinates we clicked
         //Division is the travel time
-        int speed = 5;
+        int speed = 6;
 
         double projectileDir = Math.toDegrees(Math.atan2(mouseY, mouseX));
         velX = (float)(Math.cos(Math.toRadians(projectileDir))*speed);

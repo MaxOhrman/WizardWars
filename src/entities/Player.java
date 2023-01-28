@@ -148,14 +148,9 @@ public class Player extends GameObject{
                     y + (getWidth()/2),
                     8,8, ID.Projectile, handler,
                     false, mouseX, mouseY, spriteSheet));
-            System.out.println("PlayerX:" + this.x  + " PlayerY: " + this.y);
-            System.out.println("MouseX:" + mouseX + " mouseY: " + mouseY);
-            System.out.println("GameWidth:" + game.getWidth() + " GameHeight: " + game.getHeight());
             exhausted.setExhausted();
         }
     }
-
-    //gamewidth 1920, gameHeight 1009
 
 
     @Override

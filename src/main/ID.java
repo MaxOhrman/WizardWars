@@ -42,7 +42,9 @@ public enum ID {
     Dirt_Inner_NE,
     Dirt_Inner_NW,
     Dirt_Inner_SE,
-    Dirt_Inner_SW
+    Dirt_Inner_SW,
+
+    BigTree
 
 
 

@@ -1,6 +1,7 @@
 package main;
 
 import entities.Player;
+import entities.tiles.BigTree;
 import entities.tiles.Block;
 import entities.tiles.Dirt;
 import entities.tiles.Grass;
@@ -246,6 +247,12 @@ public class Game extends Canvas implements Runnable {
                 }
                 if (blue == 80) {
                     handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_SW, false, spriteSheet));
+                }
+
+                //:::::::: Foliage 10-X::::::::
+                //Big Tree Green:10
+                if (green == 10) {
+                    handler.addObject(new BigTree(xx*32,yy*32, 64,64, ID.BigTree, true, spriteSheet));
                 }
 
 
