@@ -24,8 +24,12 @@ public class Camera {
      * to "zoom" in on the player
      */
     public void tick(GameObject object) {
-        x += ((object.getX() - x) - game.getWidth()/2f) * 0.3f;
-        y += ((object.getY() - y) - game.getHeight()/2f) * 0.3f;
+//        x += ((object.getX() - x) - game.getWidth()/2f) * 0.3f;
+//        y += ((object.getY() - y) - game.getHeight()/2f) * 0.3f;
+
+
+        x = ((object.getX()+32)*4f) - 1920/2f;
+        y = ((object.getY()+32)*4f) - 1009/2f;
 
         /*
         TODO stop camera from moving out of levels

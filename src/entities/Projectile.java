@@ -5,7 +5,6 @@ import main.ID;
 import main.SpriteSheet;
 
 import java.awt.*;
-import java.util.Iterator;
 
 public class Projectile extends GameObject {
 
@@ -19,9 +18,9 @@ public class Projectile extends GameObject {
 
         //Let's set the Projectile velocity towards the coordinates we clicked
         //Division is the travel time
-        int speed = 10;
+        int speed = 5;
 
-        double projectileDir = Math.toDegrees(Math.atan2(mouseY - y, mouseX - x));
+        double projectileDir = Math.toDegrees(Math.atan2(mouseY, mouseX));
         velX = (float)(Math.cos(Math.toRadians(projectileDir))*speed);
         velY = (float)(Math.sin(Math.toRadians(projectileDir ))*speed);
     }
@@ -32,11 +31,9 @@ public class Projectile extends GameObject {
         y += velY;
 
         //TODO Check if collision with monster
-        Iterator<GameObject> it = handler.getObjectArray().iterator();
-        while (it.hasNext()) {
-            GameObject object = it.next();
-            if(object.hasCollision) {
-                if(getBounds().intersects(object.getBounds())) {
+        for (GameObject object : handler.getObjectArray()) {
+            if (object.hasCollision) {
+                if (getBounds().intersects(object.getBounds())) {
                     this.alive = false;
                 }
             }

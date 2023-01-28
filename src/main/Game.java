@@ -22,17 +22,16 @@ public class Game extends Canvas implements Runnable {
     private final Camera camera;
     private SpriteSheet spriteSheet;
 
-    private BufferedImage buffered_sprite_sheet = null;
-    private BufferedImage floor = null;
+    private BufferedImage buffered_sprite_sheet;
 
     public Game() {
-        new GameWindow("A war of wizards", this, 400,400);
+        new GameWindow("A war of wizards", this, 1920,1080);
         handler = new Handler();
         camera = new Camera(0,0, this);
 
         //Adding listeners for all inputs
         addKeyListener(new KeyboardInputs(handler));
-        MouseInputs mouseInputs = new MouseInputs(handler, camera);
+        MouseInputs mouseInputs = new MouseInputs(handler, camera, this);
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
         setFocusable(true);
@@ -45,8 +44,6 @@ public class Game extends Canvas implements Runnable {
         //Load in sprites as BufferedImage then we create SpriteSheet
         buffered_sprite_sheet = loader.loadImage("/sprites.png");
         spriteSheet = new SpriteSheet(buffered_sprite_sheet);
-
-        floor = spriteSheet.getSprite(2,10,32,32);
 
         loadLevel(level_1);
 
@@ -122,18 +119,21 @@ public class Game extends Canvas implements Runnable {
         //////// We draw things to our game here////////
         //// graphics objects is added top to bottom ///
 
-//        // Render Background
-//        g.setColor(Color.red);
-//        g.fillRect(0,0,1000,563);
+        // Render Background
+        g.setColor(Color.red);
+        g.fillRect(0,0,4000,4000);
 
 
         //Camera translation starts (Everything between will be translated)
         g2d.translate(-camera.getX(), -camera.getY());
 
 
+        //Scale objects 4 times bigger
+        g2d.scale(4.0,4.0);
 
         //Render game objects
         handler.render(g);
+
 
         //Camera translation ends (Everything between will be translated)
         g2d.translate(-camera.getX(), -camera.getY());
@@ -255,7 +255,7 @@ public class Game extends Canvas implements Runnable {
                 }
 
                 //Adding the player last
-                handler.addPlayer(new Player(3*32,3*32, 32, 32, ID.Player, handler, true, spriteSheet));
+                handler.addPlayer(new Player(3*32,3*32, 32, 32, ID.Player, handler, true, spriteSheet, this));
             }
         }
     }

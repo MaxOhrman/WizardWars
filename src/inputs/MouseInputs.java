@@ -1,6 +1,7 @@
 package inputs;
 
 import main.Camera;
+import main.Game;
 import main.Handler;
 
 import java.awt.event.MouseEvent;
@@ -11,10 +12,12 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private final Handler handler;
     private final Camera camera;
+    Game game;
 
-    public MouseInputs(Handler handler, Camera camera) {
+    public MouseInputs(Handler handler, Camera camera, Game game) {
         this.handler = handler;
         this.camera = camera;
+        this.game = game;
     }
 
     @Override
@@ -29,9 +32,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         //Getting the position of the mouse doesn't translate
         //the correct position of our mouse
-        //We need to add the coordinates relative to the camera
-        int mouseX = (int) (e.getX() + camera.getX());
-        int mouseY = (int) (e.getY() + camera.getY());
+        //We need to add the coordinates relative to the game canvas
+        int mouseX = e.getX()-(game.getWidth()/2)+64;
+        int mouseY = e.getY()-(game.getHeight()/2)+64;
 
 
         if (handler.playerExist()) {

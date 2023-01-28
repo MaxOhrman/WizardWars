@@ -11,16 +11,18 @@ public class Player extends GameObject{
     Exhaust exhausted;
     BufferedImage player_sprite;
     SpriteSheet spriteSheet;
+    Game game;
 
 
 
 
-    public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet) {
+    public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet, Game game) {
         super(x, y, width, height, id, enableCollision, spriteSheet);
         this.handler = handler;
         this.exhausted = new Exhaust(600);
         this.spriteSheet = spriteSheet;
         this.player_sprite = spriteSheet.getSprite(1,1,32,32);
+        this.game = game;
     }
 
     /**
@@ -44,7 +46,7 @@ public class Player extends GameObject{
      */
     @Override
     public void tick() {
-        int vel = 5;
+        int vel = 2;
         x += velX;
         y += velY;
 
@@ -146,14 +148,20 @@ public class Player extends GameObject{
                     y + (getWidth()/2),
                     8,8, ID.Projectile, handler,
                     false, mouseX, mouseY, spriteSheet));
+            System.out.println("PlayerX:" + this.x  + " PlayerY: " + this.y);
+            System.out.println("MouseX:" + mouseX + " mouseY: " + mouseY);
+            System.out.println("GameWidth:" + game.getWidth() + " GameHeight: " + game.getHeight());
             exhausted.setExhausted();
         }
     }
+
+    //gamewidth 1920, gameHeight 1009
 
 
     @Override
     public void render(Graphics g) {
         g.drawImage(player_sprite, x, y,null);
+
     }
 
     /**

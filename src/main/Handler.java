@@ -4,7 +4,6 @@ import entities.GameObject;
 import entities.Player;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -36,9 +35,12 @@ public class Handler {
 
         //Tick for projectiles
         for (GameObject projectile : projectiles) {
-            projectile.tick();
             if (!projectile.isAlive()) {
                 projectiles.remove(projectile);
+                break;
+            }
+            if(projectile.isAlive()) {
+                projectile.tick();
                 break;
             }
         }
@@ -55,18 +57,14 @@ public class Handler {
      */
     public void render(Graphics g) {
         //Render for objects
-        Iterator<GameObject> iterator = object.iterator();
 
-        while(iterator.hasNext()) {
-            GameObject object = iterator.next();
+        for (GameObject object : object) {
             object.render(g);
         }
 
         //Render Projectiles
-        Iterator<GameObject> projectileIterator = projectiles.iterator();
 
-        while(projectileIterator.hasNext()) {
-            GameObject projectile = projectileIterator.next();
+        for (GameObject projectile : projectiles) {
             projectile.render(g);
         }
 
