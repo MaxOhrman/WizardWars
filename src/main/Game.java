@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage floor = null;
 
     public Game() {
-        new GameWindow("A war of wizards", this, 1000,563);
+        new GameWindow("A war of wizards", this, 400,400);
         handler = new Handler();
         camera = new Camera(0,0, this);
 
@@ -122,13 +122,15 @@ public class Game extends Canvas implements Runnable {
         //////// We draw things to our game here////////
         //// graphics objects is added top to bottom ///
 
-        // Render Background
-        g.setColor(Color.red);
-        g.fillRect(0,0,1000,563);
+//        // Render Background
+//        g.setColor(Color.red);
+//        g.fillRect(0,0,1000,563);
 
 
         //Camera translation starts (Everything between will be translated)
         g2d.translate(-camera.getX(), -camera.getY());
+
+
 
         //Render game objects
         handler.render(g);

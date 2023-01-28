@@ -1,9 +1,6 @@
 package entities;
 
-import main.Exhaust;
-import main.Handler;
-import main.ID;
-import main.SpriteSheet;
+import main.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
