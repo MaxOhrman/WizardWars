@@ -3,20 +3,27 @@ package entities;
 import main.Exhaust;
 import main.Handler;
 import main.ID;
+import main.SpriteSheet;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends GameObject{
 
     Handler handler;
     Exhaust exhausted;
+    BufferedImage player_sprite;
+    SpriteSheet spriteSheet;
 
 
 
-    public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision) {
-        super(x, y, width, height, id, enableCollision);
+
+    public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet) {
+        super(x, y, width, height, id, enableCollision, spriteSheet);
         this.handler = handler;
         this.exhausted = new Exhaust(600);
+        this.spriteSheet = spriteSheet;
+        this.player_sprite = spriteSheet.getSprite(1,1,32,32);
     }
 
     /**
@@ -85,7 +92,7 @@ public class Player extends GameObject{
         for(int i = 0; i < handler.getObjectArray().size(); i++) {
             GameObject object = handler.getObjectArray().get(i);
 
-            if (object.hasCollision && this != object) {
+            if (object.hasCollision) {
                 if(getBounds().intersects(object.getBounds())) {
 
                     modifyPosByVelocity(object);
@@ -141,7 +148,7 @@ public class Player extends GameObject{
                     x + (getWidth()/2),
                     y + (getWidth()/2),
                     8,8, ID.Projectile, handler,
-                    false, mouseX, mouseY));
+                    false, mouseX, mouseY, spriteSheet));
             exhausted.setExhausted();
         }
     }
@@ -149,8 +156,7 @@ public class Player extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect(x,y, width, height);
+        g.drawImage(player_sprite, x, y,null);
     }
 
     /**

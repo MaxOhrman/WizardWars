@@ -16,7 +16,35 @@ public enum ID {
     Block(),
     Crate(),
     Projectile(),
-    Enemy()
+    Enemy(),
+
+    //Grass
+    Grass_0(),
+    Grass_1(),
+    Grass_2(),
+
+    //Dirt
+    Dirt_0,
+    Dirt_1,
+    Dirt_2,
+
+    //Dirt-Grass borders
+    Dirt_N,
+    Dirt_E,
+    Dirt_W,
+    Dirt_S,
+
+    Dirt_NE,
+    Dirt_NW,
+    Dirt_SW,
+    Dirt_SE,
+
+    Dirt_Inner_NE,
+    Dirt_Inner_NW,
+    Dirt_Inner_SE,
+    Dirt_Inner_SW
+
+
 
 
 }

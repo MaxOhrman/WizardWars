@@ -1,13 +1,15 @@
-package entities;
+package entities.tiles;
 
+import entities.GameObject;
 import main.ID;
+import main.SpriteSheet;
 
 import java.awt.*;
 
 public class Block extends GameObject {
 
-    public Block(int x, int y, int width, int height, ID id, boolean enableCollision) {
-        super(x, y, width, height, id, enableCollision);
+    public Block(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
+        super(x, y, width, height, id, enableCollision, spriteSheet);
     }
 
     @Override

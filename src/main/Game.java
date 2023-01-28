@@ -1,7 +1,9 @@
 package main;
 
-import entities.Block;
 import entities.Player;
+import entities.tiles.Block;
+import entities.tiles.Dirt;
+import entities.tiles.Grass;
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
@@ -18,6 +20,10 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning = false;
     private final Handler handler;
     private final Camera camera;
+    private SpriteSheet spriteSheet;
+
+    private BufferedImage buffered_sprite_sheet = null;
+    private BufferedImage floor = null;
 
     public Game() {
         new GameWindow("A war of wizards", this, 1000,563);
@@ -35,6 +41,13 @@ public class Game extends Canvas implements Runnable {
         //occupy the canvas with objects from level_1.png
         BufferedImageLoader loader = new BufferedImageLoader();
         BufferedImage level_1 = loader.loadImage("/level_1.png");
+
+        //Load in sprites as BufferedImage then we create SpriteSheet
+        buffered_sprite_sheet = loader.loadImage("/sprites.png");
+        spriteSheet = new SpriteSheet(buffered_sprite_sheet);
+
+        floor = spriteSheet.getSprite(2,10,32,32);
+
         loadLevel(level_1);
 
         startGameLoop();
@@ -124,6 +137,7 @@ public class Game extends Canvas implements Runnable {
         g2d.translate(-camera.getX(), -camera.getY());
 
 
+
         ////////////////////////////////////////////////
         g.dispose();
         bufferStrategy.show();
@@ -153,13 +167,93 @@ public class Game extends Canvas implements Runnable {
                 int green = (pixel >> 8) & 0xff;
                 int blue = (pixel) & 0xff;
 
+                //:::::::: GRASS ::::::::
+                if (green == 255) {
+                    handler.addObject(new Grass(xx*32,yy*32, 32,32, ID.Grass_0, false, spriteSheet));
+                }
+                if (green == 254) {
+                    handler.addObject(new Grass(xx*32,yy*32, 32,32, ID.Grass_1, false, spriteSheet));
+                }
+                if (green == 253) {
+                    handler.addObject(new Grass(xx*32,yy*32, 32,32, ID.Grass_2, false, spriteSheet));
+                }
+
+                //:::::::: Dirt ::::::::
+
+                //d0: 165
+                //d1: 155
+                //d2: 145
+                if (red == 165) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_0, false, spriteSheet));
+                }
+                if (red == 155) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_1, false, spriteSheet));
+                }
+                if (red == 145) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_2, false, spriteSheet));
+                }
+
+                // borders
+                //n: 135
+                //w: 130
+                //e: 125
+                //s: 120
+
+                if (blue == 135) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_N, false, spriteSheet));
+                }
+                if (blue == 130) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_W, false, spriteSheet));
+                }
+                if (blue == 125) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_E, false, spriteSheet));
+                }
+                if (blue == 120) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_S, false, spriteSheet));
+                }
+
+                //ne: 115
+                //nw: 110
+                //se: 105
+                //sw: 100
+                if (blue == 115) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_NE, false, spriteSheet));
+                }
+                if (blue == 110) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_NW, false, spriteSheet));
+                }
+                if (blue == 105) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_SE, false, spriteSheet));
+                }
+                if (blue == 100) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_SW, false, spriteSheet));
+                }
+
+                //Inner_NE: 95
+                //Inner_NW: 90
+                //Inner_SE: 85
+                //Inner_SW: 80
+                if (blue == 95) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_NE, false, spriteSheet));
+                }
+                if (blue == 90) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_NW, false, spriteSheet));
+                }
+                if (blue == 85) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_SE, false, spriteSheet));
+                }
+                if (blue == 80) {
+                    handler.addObject(new Dirt(xx*32,yy*32, 32,32, ID.Dirt_Inner_SW, false, spriteSheet));
+                }
+
+
+                //Adding outer wall
                 if (red == 255) {
-                    handler.addObject(new Block(xx*32,yy*32, 32,32, ID.Block, true));
+                    handler.addObject(new Block(xx*32,yy*32, 32,32, ID.Block, true, spriteSheet));
                 }
-                if(blue == 255) {
-//                    handler.addObject(new Player(xx*32,yy*32, 32, 64, ID.Player, handler, true));
-                    handler.addPlayer(new Player(xx*32,yy*32, 32, 64, ID.Player, handler, true));
-                }
+
+                //Adding the player last
+                handler.addPlayer(new Player(3*32,3*32, 32, 32, ID.Player, handler, true, spriteSheet));
             }
         }
     }

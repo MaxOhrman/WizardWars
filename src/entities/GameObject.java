@@ -1,6 +1,7 @@
 package entities;
 
 import main.ID;
+import main.SpriteSheet;
 
 import java.awt.*;
 
@@ -16,8 +17,9 @@ public abstract class GameObject {
     protected boolean hasCollision;
     protected int width, height;
     protected boolean isAlive;
+    protected SpriteSheet ss;
 
-    public GameObject(int x, int y, int width, int height, ID id, boolean enableCollision) {
+    public GameObject(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -25,6 +27,7 @@ public abstract class GameObject {
         this.id = id;
         this.hasCollision = enableCollision;
         this.isAlive = false;
+        this.ss = spriteSheet;
     }
 
     public abstract void tick();

@@ -2,6 +2,7 @@ package entities;
 
 import main.Handler;
 import main.ID;
+import main.SpriteSheet;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -11,8 +12,8 @@ public class Projectile extends GameObject {
     public boolean alive;
     private Handler handler;
 
-    public Projectile(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY) {
-        super(x, y, width, height, id, enableCollision);
+    public Projectile(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY, SpriteSheet spriteSheet) {
+        super(x, y, width, height, id, enableCollision, spriteSheet);
         this.handler = handler;
         this.alive = true;
 
@@ -30,10 +31,11 @@ public class Projectile extends GameObject {
         x += velX;
         y += velY;
 
+        //TODO Check if collision with monster
         Iterator<GameObject> it = handler.getObjectArray().iterator();
         while (it.hasNext()) {
             GameObject object = it.next();
-            if(object.hasCollision && this != object) {
+            if(object.hasCollision) {
                 if(getBounds().intersects(object.getBounds())) {
                     this.alive = false;
                 }
