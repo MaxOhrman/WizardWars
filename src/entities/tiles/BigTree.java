@@ -48,8 +48,7 @@ public class BigTree extends GameObject {
 
     @Override
     public Rectangle getBounds() {
-        int offset = 5; //Increased offset means a smaller collision box relative to object size
-        return new Rectangle((int)x + offset, (int)y + offset, (int)width - (offset * 2), (int)height - (offset * 2));
+        return new Rectangle((int)x, (int)y, (int)width, (int)height);
     }
 
 }

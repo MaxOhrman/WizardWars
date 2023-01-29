@@ -1,10 +1,7 @@
 package entities.Monster;
 
 import entities.GameObject;
-import main.Animator;
-import main.Handler;
-import main.ID;
-import main.SpriteSheet;
+import main.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,45 +27,50 @@ public class GoblinArcher extends GameObject {
 
     @Override
     public void tick() {
-        tickDirSetter();
+        timedDirSetter();
+
+        double vel = 1;
+        x += velX;
+        y += velY;
+
+        collision();
+
+                    if (up) {
+                        velY = -vel;
+                    } else if (!down) {
+                        velY = 0;
+                    }
+
+                    if (down) {
+                        velY = vel;
+                    } else if (!up) {
+                        velY = 0;
+                    }
+
+                    if (left) {
+                        velX = vel;
+                    } else if (!right) {
+                        velX = 0;
+                    }
+
+                    if (right) {
+                        velX = -vel;
+                    } else if (!left) {
+                        velX = 0;
+                    }
 
 
-            double vel = 0.5;
-            x += velX;
-            y += velY;
 
-
-            if (up) {
-                velY = -vel;
-            } else if (!down) {
-                velY = 0;
-            }
-
-            if (down) {
-                velY = vel;
-            } else if (!up) {
-                velY = 0;
-            }
-
-            if (left) {
-                velX = vel;
-            } else if (!right) {
-                velX = 0;
-            }
-
-            if (right) {
-                velX = -vel;
-            } else if (!left) {
-                velX = 0;
-            }
     }
+
+
 
 
     @Override
     public void render(Graphics g) {
-        if(velX < 0) {
+        if(velX < 0 || velY < 0) {
             g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()), (int) x, (int) y, null);
-        } else if (velX > 0) {
+        } else if (velX > 0 || velY > 0) {
             g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()+3), (int) x, (int) y, null);
         } else {
             g.drawImage(goblinArcher_sprites.get(0), (int)x, (int)y, null);
@@ -79,5 +81,9 @@ public class GoblinArcher extends GameObject {
     public Rectangle getBounds() {
         int offset = 4; //Increased offset means a smaller collision box relative to object size
         return new Rectangle((int)x + offset, (int)y + offset, (int)width - (offset * 2), (int)height - (offset * 2));
+    }
+
+    public Rectangle getBoundsBig() {
+        return  new Rectangle((int)x-16, (int)y-16, 64,64);
     }
 }
