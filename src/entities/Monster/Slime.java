@@ -15,8 +15,8 @@ public class Slime extends GameObject {
     private final ArrayList<BufferedImage> slime_sprites = new ArrayList<>();
     private Handler handler;
 
-    public Slime(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet);
+    public Slime(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
 
         slime_sprites.add(spriteSheet.getSprite(1, 7, 32, 32));
         slime_sprites.add(spriteSheet.getSprite(2, 7, 32, 32));
@@ -26,15 +26,15 @@ public class Slime extends GameObject {
 
     @Override
     public void tick() {
-        int vel = 1;
+        double vel = 0.2;
         x += velX;
         y += velY;
 
-        int x1 = this.getX();
-        int y1 = this.getY();
+        double x1 = this.getX();
+        double y1 = this.getY();
 
-        int x2 = handler.getPlayer().getX();
-        int y2 = handler.getPlayer().getY();
+        double x2 = handler.getPlayer().getX();
+        double y2 = handler.getPlayer().getY();
 
         double ac = Math.abs(y2 - y1);
         double cb = Math.abs(x2 - x1);
@@ -52,11 +52,11 @@ public class Slime extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(slime_sprites.get(Animator.getAnimationFrame()), x, y, null);
+        g.drawImage(slime_sprites.get(Animator.getAnimationFrame()), (int)x, (int)y, null);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle((int) x, (int) y, (int) width, (int)height);
     }
 }

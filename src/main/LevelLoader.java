@@ -48,13 +48,13 @@ public class LevelLoader {
 
                 //:::::::: GRASS ::::::::
                 if (green == 255) {
-                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_0, false, spriteSheet));
+                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_0, false, spriteSheet, handler));
                 }
                 if (green == 254) {
-                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_1, false, spriteSheet));
+                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_1, false, spriteSheet, handler));
                 }
                 if (green == 253) {
-                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_2, false, spriteSheet));
+                    handler.addObject(new Grass(xx * 32, yy * 32, 32, 32, ID.Grass_2, false, spriteSheet, handler));
                 }
 
                 //:::::::: Dirt ::::::::
@@ -63,13 +63,13 @@ public class LevelLoader {
                 //d1: 155
                 //d2: 145
                 if (red == 165) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_0, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_0, false, spriteSheet, handler));
                 }
                 if (red == 155) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_1, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_1, false, spriteSheet, handler));
                 }
                 if (red == 145) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_2, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_2, false, spriteSheet, handler));
                 }
 
                 // borders
@@ -79,16 +79,16 @@ public class LevelLoader {
                 //s: 120
 
                 if (blue == 135) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_N, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_N, false, spriteSheet, handler));
                 }
                 if (blue == 130) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_W, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_W, false, spriteSheet, handler));
                 }
                 if (blue == 125) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_E, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_E, false, spriteSheet, handler));
                 }
                 if (blue == 120) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_S, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_S, false, spriteSheet, handler));
                 }
 
                 //ne: 115
@@ -96,16 +96,16 @@ public class LevelLoader {
                 //se: 105
                 //sw: 100
                 if (blue == 115) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_NE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_NE, false, spriteSheet, handler));
                 }
                 if (blue == 110) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_NW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_NW, false, spriteSheet, handler));
                 }
                 if (blue == 105) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_SE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_SE, false, spriteSheet, handler));
                 }
                 if (blue == 100) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_SW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_SW, false, spriteSheet, handler));
                 }
 
                 //Inner_NE: 95
@@ -113,16 +113,16 @@ public class LevelLoader {
                 //Inner_SE: 85
                 //Inner_SW: 80
                 if (blue == 95) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_NE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_NE, false, spriteSheet, handler));
                 }
                 if (blue == 90) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_NW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_NW, false, spriteSheet, handler));
                 }
                 if (blue == 85) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_SE, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_SE, false, spriteSheet, handler));
                 }
                 if (blue == 80) {
-                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_SW, false, spriteSheet));
+                    handler.addObject(new Dirt(xx * 32, yy * 32, 32, 32, ID.Dirt_Inner_SW, false, spriteSheet, handler));
                 }
 
                 //:::::::: Foliage 10-X::::::::
@@ -131,22 +131,22 @@ public class LevelLoader {
                 //BigTree SW: 30
                 //BigTree SE: 40
                 if (green == 10) {
-                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_NW, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_NW, true, spriteSheet, handler));
                 }
                 if (green == 20) {
-                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_NE, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_NE, true, spriteSheet, handler));
                 }
                 if (green == 30) {
-                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SW, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SW, true, spriteSheet, handler));
                 }
                 if (green == 40) {
-                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SE, true, spriteSheet));
+                    handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SE, true, spriteSheet, handler));
                 }
 
 
                 //Adding outer wall
                 if (red == 255) {
-                    handler.addObject(new Block(xx * 32, yy * 32, 32, 32, ID.Block, true, spriteSheet));
+                    handler.addObject(new Block(xx * 32, yy * 32, 32, 32, ID.Block, true, spriteSheet, handler));
                 }
 
             }

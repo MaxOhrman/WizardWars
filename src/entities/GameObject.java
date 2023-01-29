@@ -1,5 +1,6 @@
 package entities;
 
+import main.Handler;
 import main.ID;
 import main.SpriteSheet;
 
@@ -12,17 +13,18 @@ import java.util.Random;
  */
 public abstract class GameObject {
 
-    protected int x, y;
-    protected float velX = 0, velY = 0;
+    protected double x, y;
+    protected double velX = 0, velY = 0;
     protected ID id;
     public boolean hasCollision;
-    protected int width, height;
+    protected double width, height;
     protected boolean isAlive;
     protected SpriteSheet ss;
     protected boolean up = false, down = false, right = false, left = false;
     protected int tickCount;
+    protected Handler handler;
 
-    public GameObject(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
+    public GameObject(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -31,6 +33,7 @@ public abstract class GameObject {
         this.hasCollision = enableCollision;
         this.isAlive = false;
         this.ss = spriteSheet;
+        this.handler = handler;
     }
 
     public abstract void tick();
@@ -87,7 +90,20 @@ public abstract class GameObject {
 
     }
 
-    public int getX() {
+    public double getPlayerDistance(){
+        double x1 = this.getX();
+        double y1 = this.getY();
+
+        double x2 = handler.getPlayer().getX();
+        double y2 = handler.getPlayer().getY();
+
+        double ac = Math.abs(y2 - y1);
+        double cb = Math.abs(x2 - x1);
+
+        return Math.hypot(ac, cb);
+    }
+
+    public double getX() {
         return x;
     }
 
@@ -95,7 +111,7 @@ public abstract class GameObject {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
@@ -103,7 +119,7 @@ public abstract class GameObject {
         this.y = y;
     }
 
-    public float getVelX() {
+    public double getVelX() {
         return velX;
     }
 
@@ -111,7 +127,7 @@ public abstract class GameObject {
         this.velX = velX;
     }
 
-    public float getVelY() {
+    public double getVelY() {
         return velY;
     }
 
@@ -131,11 +147,11 @@ public abstract class GameObject {
         return hasCollision;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 

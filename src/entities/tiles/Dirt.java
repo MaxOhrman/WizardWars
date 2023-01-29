@@ -1,6 +1,7 @@
 package entities.tiles;
 
 import entities.GameObject;
+import main.Handler;
 import main.ID;
 import main.SpriteSheet;
 
@@ -13,8 +14,8 @@ public class Dirt extends GameObject {
     private final ArrayList<BufferedImage> solid_dirt_sprites = new ArrayList<>();
     private final ArrayList<BufferedImage> dirt_borders = new ArrayList<>();
 
-    public Dirt(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
-        super(x, y, width, height, id, enableCollision, spriteSheet);
+    public Dirt(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
 
         //Adding solid dirt
         solid_dirt_sprites.add(spriteSheet.getSprite(3, 8, 32, 32));
@@ -48,61 +49,61 @@ public class Dirt extends GameObject {
     @Override
     public void render(Graphics g) {
         if (this.id == ID.Dirt_0) {
-            g.drawImage(solid_dirt_sprites.get(0), x, y, null);
+            g.drawImage(solid_dirt_sprites.get(0), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_1) {
-            g.drawImage(solid_dirt_sprites.get(1), x, y, null);
+            g.drawImage(solid_dirt_sprites.get(1), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_2) {
-            g.drawImage(solid_dirt_sprites.get(2), x, y, null);
+            g.drawImage(solid_dirt_sprites.get(2), (int) x, (int) y, null);
         }
 
         //Render borders n,w,e,s grass - dirt borders
         if (this.id == ID.Dirt_N) {
-            g.drawImage(dirt_borders.get(0), x, y, null);
+            g.drawImage(dirt_borders.get(0), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_W) {
-            g.drawImage(dirt_borders.get(1), x, y, null);
+            g.drawImage(dirt_borders.get(1), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_E) {
-            g.drawImage(dirt_borders.get(2), x, y, null);
+            g.drawImage(dirt_borders.get(2), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_S) {
-            g.drawImage(dirt_borders.get(3), x, y, null);
+            g.drawImage(dirt_borders.get(3), (int) x, (int) y, null);
         }
 
         //Render borders ne,nw,se,sw grass - dirt borders
         if (this.id == ID.Dirt_NE) {
-            g.drawImage(dirt_borders.get(4), x, y, null);
+            g.drawImage(dirt_borders.get(4), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_NW) {
-            g.drawImage(dirt_borders.get(5), x, y, null);
+            g.drawImage(dirt_borders.get(5), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_SE) {
-            g.drawImage(dirt_borders.get(6), x, y, null);
+            g.drawImage(dirt_borders.get(6), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_SW) {
-            g.drawImage(dirt_borders.get(7), x, y, null);
+            g.drawImage(dirt_borders.get(7), (int) x, (int) y, null);
         }
 
         //Render inner borders Inner_ne,Inner_nw,Inner_se,Inner_sw grass - dirt borders
         if (this.id == ID.Dirt_Inner_NE) {
-            g.drawImage(dirt_borders.get(8), x, y, null);
+            g.drawImage(dirt_borders.get(8), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_Inner_NW) {
-            g.drawImage(dirt_borders.get(9), x, y, null);
+            g.drawImage(dirt_borders.get(9), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_Inner_SE) {
-            g.drawImage(dirt_borders.get(10), x, y, null);
+            g.drawImage(dirt_borders.get(10), (int) x, (int) y, null);
         }
         if (this.id == ID.Dirt_Inner_SW) {
-            g.drawImage(dirt_borders.get(11), x, y, null);
+            g.drawImage(dirt_borders.get(11), (int) x, (int) y, null);
         }
 
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle((int)x, (int)y, (int)width, (int)height);
     }
 }

@@ -23,8 +23,8 @@ public class Camera {
      */
     public void tick(GameObject object) {
 
-        x = ((object.getX() + 32) * 4f) - 1920 / 2f;
-        y = ((object.getY() + 32) * 4f) - 1009 / 2f;
+        x = (float) (((object.getX() + 32.0) * 4.0) - 1920.0 / 2.0);
+        y = (float) (((object.getY() + 32.0) * 4.0) - 1009.0 / 2.0);
 
         /*
         TODO stop camera from moving out of levels

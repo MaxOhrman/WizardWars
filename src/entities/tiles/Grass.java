@@ -1,6 +1,7 @@
 package entities.tiles;
 
 import entities.GameObject;
+import main.Handler;
 import main.ID;
 import main.SpriteSheet;
 
@@ -12,8 +13,8 @@ public class Grass extends GameObject {
 
     private ArrayList<BufferedImage> grass_sprites = new ArrayList<>();
 
-    public Grass(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet) {
-        super(x, y, width, height, id, enableCollision, spriteSheet);
+    public Grass(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
 
         grass_sprites.add(spriteSheet.getSprite(1, 10, 32, 32));
         grass_sprites.add(spriteSheet.getSprite(2, 10, 32, 32));
@@ -28,18 +29,18 @@ public class Grass extends GameObject {
     @Override
     public void render(Graphics g) {
         if (this.id == ID.Grass_0) {
-            g.drawImage(grass_sprites.get(0), x, y, null);
+            g.drawImage(grass_sprites.get(0), (int)x, (int)y, null);
         }
         if (this.id == ID.Grass_1) {
-            g.drawImage(grass_sprites.get(1), x, y, null);
+            g.drawImage(grass_sprites.get(1), (int)x, (int)y, null);
         }
         if (this.id == ID.Grass_2) {
-            g.drawImage(grass_sprites.get(2), x, y, null);
+            g.drawImage(grass_sprites.get(2), (int)x, (int)y, null);
         }
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle((int)x, (int)y, (int)width, (int)height);
     }
 }

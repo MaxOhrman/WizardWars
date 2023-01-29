@@ -16,7 +16,7 @@ public class Player extends GameObject {
 
 
     public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet, Game game) {
-        super(x, y, width, height, id, enableCollision, spriteSheet);
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
         this.handler = handler;
         this.exhausted = new Exhaust(600);
         this.spriteSheet = spriteSheet;
@@ -49,7 +49,7 @@ public class Player extends GameObject {
      */
     @Override
     public void tick() {
-        int vel = 1;
+        double vel = 1;
         x += velX;
         y += velY;
 
@@ -159,11 +159,11 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics g) {
         if(velX > 0) {
-            g.drawImage(player_sprites.get(Animator.getAnimationFrame()), x, y, null);
+            g.drawImage(player_sprites.get(Animator.getAnimationFrame()), (int)x, (int)y, null);
         } else if (velX < 0) {
-            g.drawImage(player_sprites.get(Animator.getAnimationFrame()+3), x, y, null);
+            g.drawImage(player_sprites.get(Animator.getAnimationFrame()+3), (int)x, (int)y, null);
         } else {
-            g.drawImage(player_sprites.get(0), x, y, null);
+            g.drawImage(player_sprites.get(0), (int)x, (int)y, null);
         }
 
 
@@ -182,6 +182,6 @@ public class Player extends GameObject {
     @Override
     public Rectangle getBounds() {
         int offset = 4; //Increased offset means a smaller collision box relative to object size
-        return new Rectangle(x + offset, y + offset, width - (offset * 2), height - (offset * 2));
+        return new Rectangle((int)x + offset, (int)y + offset, (int)width - (offset * 2), (int)height - (offset * 2));
     }
 }

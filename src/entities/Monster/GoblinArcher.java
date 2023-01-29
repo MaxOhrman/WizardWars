@@ -15,8 +15,8 @@ public class GoblinArcher extends GameObject {
     ArrayList<BufferedImage> goblinArcher_sprites = new ArrayList<>();
     Handler handler;
 
-    public GoblinArcher(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet);
+    public GoblinArcher(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
         this.handler = handler;
         //Facing left
         goblinArcher_sprites.add(spriteSheet.getSprite(1,16,32,32));
@@ -33,7 +33,7 @@ public class GoblinArcher extends GameObject {
         tickDirSetter();
 
 
-            int vel = 1;
+            double vel = 0.5;
             x += velX;
             y += velY;
 
@@ -67,17 +67,17 @@ public class GoblinArcher extends GameObject {
     @Override
     public void render(Graphics g) {
         if(velX < 0) {
-            g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()), x, y, null);
+            g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()), (int) x, (int) y, null);
         } else if (velX > 0) {
-            g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()+3), x, y, null);
+            g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()+3), (int) x, (int) y, null);
         } else {
-            g.drawImage(goblinArcher_sprites.get(0), x, y, null);
+            g.drawImage(goblinArcher_sprites.get(0), (int)x, (int)y, null);
         }
     }
 
     @Override
     public Rectangle getBounds() {
         int offset = 4; //Increased offset means a smaller collision box relative to object size
-        return new Rectangle(x + offset, y + offset, width - (offset * 2), height - (offset * 2));
+        return new Rectangle((int)x + offset, (int)y + offset, (int)width - (offset * 2), (int)height - (offset * 2));
     }
 }

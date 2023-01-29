@@ -11,8 +11,8 @@ public class Projectile extends GameObject {
     public boolean alive;
     private final Handler handler;
 
-    public Projectile(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY, SpriteSheet spriteSheet) {
-        super(x, y, width, height, id, enableCollision, spriteSheet);
+    public Projectile(double x, double y, double width, double height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY, SpriteSheet spriteSheet) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
         this.handler = handler;
         this.alive = true;
 
@@ -40,12 +40,12 @@ public class Projectile extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.green);
-        g.fillOval(x, y, 8, 8);
+        g.fillOval((int)x, (int)y, 8, 8);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 8, 8);
+        return new Rectangle((int)x, (int)y, 8, 8);
     }
 
     public boolean isAlive() {
