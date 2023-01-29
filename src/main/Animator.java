@@ -1,7 +1,7 @@
 package main;
 
 public class Animator {
-    private static int tickCount;
+    private static int animationTickCount;
     private static int animationFrame;
 
     /**
@@ -12,16 +12,18 @@ public class Animator {
     public static void tick() {
 
         //Create integer from 0-2 based on game tick rate
-        tickCount++;
+        animationTickCount++;
 
-        if(tickCount > 30) {
+        if(animationTickCount > 30) {
             if (animationFrame <= 1) {
                 animationFrame ++;
             } else {
                 animationFrame = 0;
             }
-            tickCount = 0;
+            animationTickCount = 0;
         }
+
+
 
     }
 

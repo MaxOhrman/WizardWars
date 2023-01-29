@@ -17,6 +17,7 @@ public enum ID {
 
     //Monster
     Slime(),
+    GoblinArcher,
 
     //Grass
     Grass_0(),

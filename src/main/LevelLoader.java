@@ -1,5 +1,6 @@
 package main;
 
+import entities.Monster.GoblinArcher;
 import entities.Monster.Slime;
 import entities.Player;
 import entities.tiles.BigTree;
@@ -153,6 +154,7 @@ public class LevelLoader {
 
         //Second layer of monsters/player
         //Todo load based on image.png with spawn positions instead of manually adding coordinates
+        handler.addMonster(new GoblinArcher(5 * 32, 3 * 32, 32, 32, ID.GoblinArcher, true, spriteSheet, handler));
         handler.addMonster(new Slime(4 * 32, 4 * 32, 32, 32, ID.Slime, true, spriteSheet, handler));
         handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game));
     }
