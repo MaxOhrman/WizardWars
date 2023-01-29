@@ -80,10 +80,6 @@ public abstract class GameObject {
         return hasCollision;
     }
 
-    public boolean isHasCollision() {
-        return hasCollision;
-    }
-
     public int getWidth() {
         return width;
     }
@@ -99,4 +95,5 @@ public abstract class GameObject {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
 }

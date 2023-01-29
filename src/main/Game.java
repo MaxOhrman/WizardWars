@@ -170,7 +170,7 @@ public class Game extends Canvas implements Runnable {
         if (System.currentTimeMillis() - lastCheck >= 1000) {
             lastCheck = System.currentTimeMillis();
             //TODO ADD FPS COUNTER IN-GAME
-            //System.out.println("FPS: " + frameCount);
+            System.out.println("FPS: " + frameCount);
             frameCount = 0;
         }
     }

@@ -17,6 +17,7 @@ public class Handler {
 
     private final LinkedList<GameObject> object = new LinkedList<>();
     private final LinkedList<GameObject> projectiles = new LinkedList<>();
+    private final LinkedList<GameObject> monster = new LinkedList<>();
     private Player player = null;
 
     private boolean up = false, down = false, right = false, left = false;
@@ -30,7 +31,9 @@ public class Handler {
     public void tick() {
         //Tick for objects
         for (GameObject tempObject : object) {
-            tempObject.tick();
+            if (inPlayerVicinity(tempObject)) {
+                tempObject.tick();
+            }
         }
 
         //Tick for projectiles
@@ -42,6 +45,13 @@ public class Handler {
             if (projectile.isAlive()) {
                 projectile.tick();
                 break;
+            }
+        }
+
+        //Tick for monster
+        for (GameObject monster : monster) {
+            if(inPlayerVicinity(monster)) {
+                monster.tick();
             }
         }
 
@@ -58,14 +68,27 @@ public class Handler {
     public void render(Graphics g) {
         //Render for objects
 
+
         for (GameObject object : object) {
-            object.render(g);
+            if (inPlayerVicinity(object)) {
+                object.render(g);
+            }
+
         }
 
         //Render Projectiles
-
         for (GameObject projectile : projectiles) {
-            projectile.render(g);
+            if (inPlayerVicinity(projectile)) {
+                projectile.render(g);
+            }
+        }
+
+        //Render monster
+        for (GameObject monster : monster) {
+            if (inPlayerVicinity(monster)) {
+                monster.render(g);
+            }
+
         }
 
         //Render for player
@@ -74,12 +97,23 @@ public class Handler {
         }
     }
 
+    private boolean inPlayerVicinity(GameObject obj) {
+        return (player.getX() - obj.getX() < 242
+                && player.getY() - obj.getY() < 130)
+                && obj.getX() - player.getX() < 270
+                && obj.getY() - player.getY() < 160;
+    }
+
     public void addObject(GameObject tempObject) {
         object.add(tempObject);
     }
 
     public void addPlayer(Player player) {
         this.player = player;
+    }
+
+    public void addMonster(GameObject monster) {
+        this.monster.add(monster);
     }
 
     public boolean playerExist() {
@@ -134,5 +168,6 @@ public class Handler {
     public LinkedList<GameObject> getObjectArray() {
         return this.object;
     }
+
 
 }

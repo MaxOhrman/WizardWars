@@ -13,9 +13,10 @@ package main;
 public enum ID {
     Player(),
     Block(),
-    Crate(),
     Projectile(),
-    Enemy(),
+
+    //Monster
+    Slime(),
 
     //Grass
     Grass_0(),

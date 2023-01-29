@@ -1,5 +1,6 @@
 package main;
 
+import entities.Monster.Slime;
 import entities.Player;
 import entities.tiles.BigTree;
 import entities.tiles.Block;
@@ -13,6 +14,7 @@ public class LevelLoader {
     private Handler handler;
     private SpriteSheet spriteSheet;
     private Game game;
+
 
     public LevelLoader(Handler handler, SpriteSheet spriteSheet, Game game) {
         this.handler = handler;
@@ -145,6 +147,9 @@ public class LevelLoader {
                 if (red == 255) {
                     handler.addObject(new Block(xx * 32, yy * 32, 32, 32, ID.Block, true, spriteSheet));
                 }
+
+                //Adding a slime
+                handler.addMonster(new Slime(5*32,5*32,32,32,ID.Slime, true, spriteSheet, handler));
 
                 //Adding the player last
                 handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game));
