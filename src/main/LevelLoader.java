@@ -152,6 +152,7 @@ public class LevelLoader {
         }
 
         //Second layer of monsters/player
+        //Todo load based on image.png with spawn positions instead of manually adding coordinates
         handler.addMonster(new Slime(4 * 32, 4 * 32, 32, 32, ID.Slime, true, spriteSheet, handler));
         handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game));
     }

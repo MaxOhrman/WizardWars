@@ -4,14 +4,15 @@ import main.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends GameObject {
 
     Handler handler;
     Exhaust exhausted;
-    BufferedImage player_sprite;
     SpriteSheet spriteSheet;
     Game game;
+    ArrayList<BufferedImage> player_sprites = new ArrayList<>();
 
 
     public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet, Game game) {
@@ -19,8 +20,13 @@ public class Player extends GameObject {
         this.handler = handler;
         this.exhausted = new Exhaust(600);
         this.spriteSheet = spriteSheet;
-        this.player_sprite = spriteSheet.getSprite(1, 1, 32, 32);
         this.game = game;
+        this.player_sprites.add(spriteSheet.getSprite(1, 1, 32, 32)); //right
+        this.player_sprites.add(spriteSheet.getSprite(2, 1, 32, 32)); //right
+        this.player_sprites.add(spriteSheet.getSprite(3, 1, 32, 32)); //right
+        this.player_sprites.add(spriteSheet.getSprite(1, 2, 32, 32)); //Left
+        this.player_sprites.add(spriteSheet.getSprite(2, 2, 32, 32)); //left
+        this.player_sprites.add(spriteSheet.getSprite(3, 2, 32, 32)); //left
     }
 
     /**
@@ -152,7 +158,14 @@ public class Player extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(player_sprite, x, y,32,32, null);
+        if(velX > 0) {
+            g.drawImage(player_sprites.get(Animator.getAnimationFrame()), x, y, null);
+        } else if (velX < 0) {
+            g.drawImage(player_sprites.get(Animator.getAnimationFrame()+3), x, y, null);
+        } else {
+            g.drawImage(player_sprites.get(0), x, y, null);
+        }
+
 
     }
 

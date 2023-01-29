@@ -39,22 +39,20 @@ public class Slime extends GameObject {
         double ac = Math.abs(y2 - y1);
         double cb = Math.abs(x2 - x1);
 
-        double distane = Math.hypot(ac, cb);
+        double distance = Math.hypot(ac, cb);
 
 
-        if(distane < 120) {
+        if(distance < 120) {
             velX = 1;
-        } else if (distane > 120) {
+        } else if (distance > 120) {
             velX = 0;
         }
-
-        System.out.println(this.x + "" +  this.velY);
 
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(slime_sprites.get(Animator.animationFrame), x, y, null);
+        g.drawImage(slime_sprites.get(Animator.getAnimationFrame()), x, y, null);
     }
 
     @Override

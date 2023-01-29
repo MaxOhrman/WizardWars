@@ -2,7 +2,7 @@ package main;
 
 public class Animator {
     private static int tickCount;
-    public static int animationFrame;
+    private static int animationFrame;
 
     /**
      * Tick() is called from handler
