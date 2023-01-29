@@ -143,7 +143,6 @@ public class LevelLoader {
                     handler.addObject(new BigTree(xx * 32, yy * 32, 32, 32, ID.BigTree_SE, true, spriteSheet, handler));
                 }
 
-
                 //Adding outer wall
                 if (red == 255) {
                     handler.addObject(new Block(xx * 32, yy * 32, 32, 32, ID.Block, true, spriteSheet, handler));
