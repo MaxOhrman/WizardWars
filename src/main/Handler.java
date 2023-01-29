@@ -4,7 +4,7 @@ import entities.GameObject;
 import entities.Player;
 
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * The Handlers purpose is to make sure
@@ -15,9 +15,8 @@ import java.util.LinkedList;
 
 public class Handler {
 
-    private final LinkedList<GameObject> object = new LinkedList<>();
-    private final LinkedList<GameObject> projectiles = new LinkedList<>();
-    private final LinkedList<GameObject> monster = new LinkedList<>();
+    private final ArrayList<GameObject> object = new ArrayList<>();
+    private final ArrayList<GameObject> projectiles = new ArrayList<>();
     private Player player = null;
 
     private boolean up = false, down = false, right = false, left = false;
@@ -45,13 +44,6 @@ public class Handler {
             if (projectile.isAlive()) {
                 projectile.tick();
                 break;
-            }
-        }
-
-        //Tick for monster
-        for (GameObject monster : monster) {
-            if(inPlayerVicinity(monster)) {
-                monster.tick();
             }
         }
 
@@ -85,14 +77,6 @@ public class Handler {
             }
         }
 
-        //Render monster
-        for (GameObject monster : monster) {
-            if (inPlayerVicinity(monster)) {
-                monster.render(g);
-            }
-
-        }
-
         //Render for player
         if (this.player != null) {
             player.render(g);
@@ -114,9 +98,6 @@ public class Handler {
         this.player = player;
     }
 
-    public void addMonster(GameObject monster) {
-        this.monster.add(monster);
-    }
 
     public boolean playerExist() {
         return player != null;
@@ -167,7 +148,7 @@ public class Handler {
     }
 
     //Return the array of objects in the game
-    public LinkedList<GameObject> getObjectArray() {
+    public ArrayList<GameObject> getObjectArray() {
         return this.object;
     }
 

@@ -29,7 +29,7 @@ public class Projectile extends GameObject {
 
         //TODO Check if collision with monster
         for (GameObject object : handler.getObjectArray()) {
-            if (object.hasCollision) {
+            if (object.hasCollision && object != handler.getPlayer()) {
                 if (getBounds().intersects(object.getBounds())) {
                     this.alive = false;
                 }

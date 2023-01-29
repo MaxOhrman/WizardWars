@@ -81,69 +81,6 @@ public class Player extends GameObject {
         }
     }
 
-    /**
-     * We iterate through every object added to the level
-     * and if our objects Rectangle intersect with any
-     * item in the array of objects we have a collision
-     * <p>
-     * We try to smoothen out movements against walls using
-     * getObjectDirection method to stop movement in
-     * the direction of the object we are getting stuck on
-     */
-    private void collision() {
-        for (int i = 0; i < handler.getObjectArray().size(); i++) {
-            GameObject object = handler.getObjectArray().get(i);
-
-            if (object.hasCollision) {
-                if (getBounds().intersects(object.getBounds())) {
-
-                    modifyPosByVelocity(object);
-
-                    x += velX * -1;
-                    y += velY * -1;
-
-                }
-            }
-        }
-
-    }
-
-    /**
-     * We find what side this intersects with the object and
-     * adjust the coordinate relative to velocity
-     *
-     * @param object The object we want to compare our sides too
-     */
-    private void modifyPosByVelocity(GameObject object) {
-
-        int distance = 6; //Defines the range we allow of the matching sides eg -6 to 6.
-        int southDistance = object.getBounds().y - (getBounds().y + getBounds().height);
-        int northDistance = (getBounds().y) - (object.getBounds().y + object.getBounds().height);
-        int westDistance = (object.getBounds().x + object.getBounds().width) - getBounds().x;
-        int eastDistance = object.getBounds().x - (getBounds().x + getBounds().width);
-
-        //South or North side collision
-        if ((southDistance > -distance) && (southDistance < distance) ||
-                (northDistance > -distance) && (northDistance < distance)) {
-
-            if (handler.isDown() || handler.isUp() &&
-                    handler.isRight() || handler.isLeft()) {
-                x += velX;
-            }
-        }
-
-        //West or East side collision
-        if ((westDistance > -distance) && (westDistance < distance) ||
-                (eastDistance > -distance) && (eastDistance < distance)) {
-
-            if (handler.isLeft() || handler.isRight() &&
-                    handler.isUp() || handler.isDown()) {
-                y += velY;
-            }
-        }
-
-    }
-
     public void castSpell(int mouseX, int mouseY) {
         if (!exhausted.isExhausted()) {
             handler.addProjectile(new Projectile(
@@ -154,7 +91,6 @@ public class Player extends GameObject {
             exhausted.setExhausted();
         }
     }
-
 
     @Override
     public void render(Graphics g) {

@@ -154,8 +154,14 @@ public class LevelLoader {
 
         //Second layer of monsters/player
         //Todo load based on image.png with spawn positions instead of manually adding coordinates
-        handler.addMonster(new GoblinArcher(5 * 32, 3 * 32, 32, 32, ID.GoblinArcher, true, spriteSheet, handler));
-        handler.addMonster(new Slime(4 * 32, 4 * 32, 32, 32, ID.Slime, true, spriteSheet, handler));
-        handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game));
+        handler.addObject(new GoblinArcher(5 * 32, 3 * 32, 32, 32, ID.GoblinArcher, true, spriteSheet, handler));
+        handler.addObject(new GoblinArcher(6 * 32, 3 * 32, 32, 32, ID.GoblinArcher, true, spriteSheet, handler));
+        handler.addObject(new GoblinArcher(7 * 32, 3 * 32, 32, 32, ID.GoblinArcher, true, spriteSheet, handler));
+        handler.addObject(new GoblinArcher(8 * 32, 3 * 32, 32, 32, ID.GoblinArcher, true, spriteSheet, handler));
+        handler.addObject(new Slime(4 * 32, 4 * 32, 32, 32, ID.Slime, true, spriteSheet, handler));
+        Player player = new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game);
+        handler.addObject(player);
+        handler.addPlayer(player);
+
     }
 }

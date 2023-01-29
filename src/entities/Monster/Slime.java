@@ -30,24 +30,6 @@ public class Slime extends GameObject {
         x += velX;
         y += velY;
 
-        double x1 = this.getX();
-        double y1 = this.getY();
-
-        double x2 = handler.getPlayer().getX();
-        double y2 = handler.getPlayer().getY();
-
-        double ac = Math.abs(y2 - y1);
-        double cb = Math.abs(x2 - x1);
-
-        double distance = Math.hypot(ac, cb);
-
-
-        if(distance < 120) {
-            velX = 1;
-        } else if (distance > 120) {
-            velX = 0;
-        }
-
     }
 
     @Override
