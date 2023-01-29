@@ -1,34 +1,33 @@
 package main;
 
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 public class Animator {
+    private static int tickCount;
+    public static int animationFrame;
 
-    Exhaust timer;
-    private int currentElement = 0;
-    ArrayList<BufferedImage> sprites = new ArrayList<>();
+    /**
+     * Tick() is called from handler
+     * in here we handle global timings
+     * such as animation change intervals
+     */
+    public static void tick() {
 
-    public Animator(long iterateTime) {
-        this.timer = new Exhaust(iterateTime);
-    }
+        //Create integer from 0-2 based on game tick rate
+        tickCount++;
 
-    public void addSprite(BufferedImage img) {
-        sprites.add(img);
-    }
-
-    public BufferedImage animateArray(int velx, int velY, Boolean bothDir) {
-
-        if (!timer.isExhausted()) {
-            if(currentElement < sprites.size()) {
-                currentElement ++;
+        if(tickCount > 30) {
+            if (animationFrame <= 1) {
+                animationFrame ++;
+            } else {
+                animationFrame = 0;
             }
-            if (currentElement == sprites.size()) {
-                currentElement = 0;
-            }
-            timer.setExhausted();
+            tickCount = 0;
         }
 
-        return sprites.get(currentElement);
     }
+
+    public static int getAnimationFrame(){
+        return animationFrame;
+    }
+
+
 }

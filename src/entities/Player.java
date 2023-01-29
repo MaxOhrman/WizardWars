@@ -152,7 +152,7 @@ public class Player extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(player_sprite, x, y, null);
+        g.drawImage(player_sprite, x, y,32,32, null);
 
     }
 

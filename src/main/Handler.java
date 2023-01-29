@@ -59,6 +59,8 @@ public class Handler {
         if (this.player != null) {
             player.tick();
         }
+
+        Animator.tick();
     }
 
     /**

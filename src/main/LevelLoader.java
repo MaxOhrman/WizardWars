@@ -148,12 +148,11 @@ public class LevelLoader {
                     handler.addObject(new Block(xx * 32, yy * 32, 32, 32, ID.Block, true, spriteSheet));
                 }
 
-                //Adding a slime
-                handler.addMonster(new Slime(5*32,5*32,32,32,ID.Slime, true, spriteSheet, handler));
-
-                //Adding the player last
-                handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game));
             }
         }
+
+        //Second layer of monsters/player
+        handler.addMonster(new Slime(4 * 32, 4 * 32, 32, 32, ID.Slime, true, spriteSheet, handler));
+        handler.addPlayer(new Player(3 * 32, 3 * 32, 32, 32, ID.Player, handler, true, spriteSheet, game));
     }
 }
