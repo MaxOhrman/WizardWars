@@ -27,9 +27,11 @@ public class Slime extends GameObject {
 
     @Override
     public void tick() {
-        double vel = 0.2;
         x += velX;
         y += velY;
+        timedDirSetter();
+        collision();
+        randomWalk(0.5);
 
     }
 
