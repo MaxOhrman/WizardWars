@@ -13,6 +13,8 @@ import java.util.Random;
  */
 public abstract class GameObject {
 
+    private float maxHealth;
+    private float maxMana;
     protected double x, y;
     protected double velX = 0, velY = 0;
     protected ID id;
@@ -23,6 +25,9 @@ public abstract class GameObject {
     protected boolean up = false, down = false, right = false, left = false;
     protected int tickCount;
     protected Handler handler;
+    protected boolean isCreature;
+    protected float currentHealth;
+    protected float currentMana;
 
     public GameObject(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
         this.x = x;
@@ -34,11 +39,33 @@ public abstract class GameObject {
         this.isAlive = false;
         this.ss = spriteSheet;
         this.handler = handler;
+        this.isCreature = false;
+        this.maxHealth = 1000;
+        this.maxMana = 100;
+        this.currentHealth = maxHealth;
+        this.currentMana = maxMana;
     }
 
     public abstract void tick();
 
-    public abstract void render(Graphics g);
+    public void render(Graphics g) {
+        if (isCreature && isAlive) {
+            int xOffset = ((int)this.getWidth()/6);
+            int yOffset = ((int)this.getHeight()/8);
+            int healthBarWidth = (int)this.getWidth() - xOffset*2;
+            float percentHpLeft = currentHealth/maxHealth;
+
+
+
+            //Outline
+            g.setColor(new Color(35,35,35));
+            g.fillRect((int)this.x + xOffset, (int)this.getY() - yOffset, healthBarWidth,3);
+
+            //Health bar
+            g.setColor((new Color(9, 91, 2)));
+            g.fillRect((int)this.x + xOffset, (int)this.getY() - yOffset, (int) (healthBarWidth*percentHpLeft),3);
+        }
+    }
 
     public abstract Rectangle getBounds();
 
@@ -273,4 +300,35 @@ public abstract class GameObject {
         }
     }
 
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(float maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public float getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(float maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public float getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(float currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public float getCurrentMana() {
+        return currentMana;
+    }
+
+    public void setCurrentMana(float currentMana) {
+        this.currentMana = currentMana;
+    }
 }

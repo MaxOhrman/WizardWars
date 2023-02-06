@@ -15,6 +15,8 @@ public class GoblinArcher extends GameObject {
     public GoblinArcher(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
         super(x, y, width, height, id, enableCollision, spriteSheet, handler);
         this.handler = handler;
+        this.isCreature = true;
+        this.isAlive = true;
         //Facing left
         goblinArcher_sprites.add(spriteSheet.getSprite(1,16,32,32));
         goblinArcher_sprites.add(spriteSheet.getSprite(2,16,32,32));
@@ -36,6 +38,7 @@ public class GoblinArcher extends GameObject {
 
     @Override
     public void render(Graphics g) {
+        super.render(g);
         if(velX < 0 || velY < 0) {
             g.drawImage(goblinArcher_sprites.get(Animator.getAnimationFrame()), (int) x, (int) y, null);
         } else if (velX > 0 || velY > 0) {

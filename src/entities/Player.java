@@ -21,6 +21,8 @@ public class Player extends GameObject {
         this.exhausted = new Exhaust(600);
         this.spriteSheet = spriteSheet;
         this.game = game;
+        this.isCreature = true;
+        this.isAlive = true;
         this.player_sprites.add(spriteSheet.getSprite(1, 1, 32, 32)); //right
         this.player_sprites.add(spriteSheet.getSprite(2, 1, 32, 32)); //right
         this.player_sprites.add(spriteSheet.getSprite(3, 1, 32, 32)); //right
@@ -94,6 +96,7 @@ public class Player extends GameObject {
 
     @Override
     public void render(Graphics g) {
+        super.render(g);
         if(velX > 0) {
             g.drawImage(player_sprites.get(Animator.getAnimationFrame()), (int)x, (int)y, null);
         } else if (velX < 0) {

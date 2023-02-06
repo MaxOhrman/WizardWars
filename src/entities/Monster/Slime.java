@@ -17,7 +17,8 @@ public class Slime extends GameObject {
 
     public Slime(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
         super(x, y, width, height, id, enableCollision, spriteSheet, handler);
-
+        this.isCreature = true;
+        this.isAlive = true;
         slime_sprites.add(spriteSheet.getSprite(1, 7, 32, 32));
         slime_sprites.add(spriteSheet.getSprite(2, 7, 32, 32));
         slime_sprites.add(spriteSheet.getSprite(3, 7, 32, 32));
@@ -34,6 +35,7 @@ public class Slime extends GameObject {
 
     @Override
     public void render(Graphics g) {
+        super.render(g);
         g.drawImage(slime_sprites.get(Animator.getAnimationFrame()), (int)x, (int)y, null);
     }
 
