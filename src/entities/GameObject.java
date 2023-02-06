@@ -83,36 +83,36 @@ public abstract class GameObject {
         int rand = random.nextInt(8);
 
         switch (rand) {
-            case 0:
+            case 0 -> {
                 up = true;
                 left = false;
                 right = false;
                 down = false;
-                break;
-            case 1:
+            }
+            case 1 -> {
                 up = false;
                 left = true;
                 right = false;
                 down = false;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 up = false;
                 left = false;
                 right = true;
                 down = false;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 up = false;
                 left = false;
                 right = false;
                 down = true;
-                break;
-            default:
+            }
+            default -> {
                 up = false;
                 left = false;
                 right = false;
                 down = false;
-                break;
+            }
         }
 
     }
