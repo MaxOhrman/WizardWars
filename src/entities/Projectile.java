@@ -1,5 +1,6 @@
 package entities;
 
+import main.AStarAlgorithm;
 import main.Handler;
 import main.ID;
 import main.SpriteSheet;
@@ -11,8 +12,8 @@ public class Projectile extends GameObject {
     public boolean alive;
     private final Handler handler;
 
-    public Projectile(double x, double y, double width, double height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY, SpriteSheet spriteSheet) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public Projectile(double x, double y, double width, double height, ID id, Handler handler, boolean enableCollision, int mouseX, int mouseY, SpriteSheet spriteSheet, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
         this.handler = handler;
         this.alive = true;
 

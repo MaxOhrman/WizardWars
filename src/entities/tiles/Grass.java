@@ -1,6 +1,7 @@
 package entities.tiles;
 
 import entities.GameObject;
+import main.AStarAlgorithm;
 import main.Handler;
 import main.ID;
 import main.SpriteSheet;
@@ -13,8 +14,8 @@ public class Grass extends GameObject {
 
     private ArrayList<BufferedImage> grass_sprites = new ArrayList<>();
 
-    public Grass(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public Grass(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
 
         grass_sprites.add(spriteSheet.getSprite(1, 10, 32, 32));
         grass_sprites.add(spriteSheet.getSprite(2, 10, 32, 32));

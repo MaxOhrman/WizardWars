@@ -1,10 +1,7 @@
 package entities.Monster;
 
 import entities.GameObject;
-import main.Animator;
-import main.Handler;
-import main.ID;
-import main.SpriteSheet;
+import main.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,8 +12,8 @@ public class Slime extends GameObject {
     private final ArrayList<BufferedImage> slime_sprites = new ArrayList<>();
     private Handler handler;
 
-    public Slime(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public Slime(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
         this.isCreature = true;
         this.isAlive = true;
         slime_sprites.add(spriteSheet.getSprite(1, 7, 32, 32));

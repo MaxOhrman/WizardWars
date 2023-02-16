@@ -1,6 +1,7 @@
 package entities.tiles;
 
 import entities.GameObject;
+import main.AStarAlgorithm;
 import main.Handler;
 import main.ID;
 import main.SpriteSheet;
@@ -15,8 +16,8 @@ public class BigTree extends GameObject {
     SpriteSheet spriteSheet;
     ArrayList<BufferedImage> bigTreeSprite = new ArrayList<>();
 
-    public BigTree(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public BigTree(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
         this.spriteSheet = spriteSheet;
         bigTreeSprite.add(spriteSheet.getSprite(2, 14, 32, 32)); //[0] NW
         bigTreeSprite.add(spriteSheet.getSprite(3, 14, 32, 32)); //[1] NE

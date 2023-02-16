@@ -15,8 +15,8 @@ public class Player extends GameObject {
     ArrayList<BufferedImage> player_sprites = new ArrayList<>();
 
 
-    public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet, Game game) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public Player(int x, int y, int width, int height, ID id, Handler handler, boolean enableCollision, SpriteSheet spriteSheet, Game game, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
         this.handler = handler;
         this.exhausted = new Exhaust(600);
         this.spriteSheet = spriteSheet;
@@ -89,7 +89,7 @@ public class Player extends GameObject {
                     x + (getWidth() / 2),
                     y + (getWidth() / 2),
                     8, 8, ID.Projectile, handler,
-                    false, mouseX, mouseY, spriteSheet));
+                    false, mouseX, mouseY, spriteSheet, aStarAlgorithm));
             exhausted.setExhausted();
         }
     }

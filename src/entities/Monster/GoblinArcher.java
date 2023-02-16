@@ -12,8 +12,8 @@ public class GoblinArcher extends GameObject {
     ArrayList<BufferedImage> goblinArcher_sprites = new ArrayList<>();
     Handler handler;
 
-    public GoblinArcher(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public GoblinArcher(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
         this.handler = handler;
         this.isCreature = true;
         this.isAlive = true;

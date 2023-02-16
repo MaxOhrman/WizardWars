@@ -1,6 +1,7 @@
 package entities.tiles;
 
 import entities.GameObject;
+import main.AStarAlgorithm;
 import main.Handler;
 import main.ID;
 import main.SpriteSheet;
@@ -14,8 +15,8 @@ public class Dirt extends GameObject {
     private final ArrayList<BufferedImage> solid_dirt_sprites = new ArrayList<>();
     private final ArrayList<BufferedImage> dirt_borders = new ArrayList<>();
 
-    public Dirt(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
-        super(x, y, width, height, id, enableCollision, spriteSheet, handler);
+    public Dirt(int x, int y, int width, int height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler, AStarAlgorithm aStarAlgorithm) {
+        super(x, y, width, height, id, enableCollision, spriteSheet, handler, aStarAlgorithm);
 
         //Adding solid dirt
         solid_dirt_sprites.add(spriteSheet.getSprite(3, 8, 32, 32));
