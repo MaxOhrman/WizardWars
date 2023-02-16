@@ -2,9 +2,9 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Node {
+
     private int x;
     private int y;
     private List<Node> neighbors;
@@ -23,25 +23,27 @@ public class Node {
         return y;
     }
 
-    public void addNeighbor(Node neighbor) {
-        neighbors.add(neighbor);
-    }
-
     public List<Node> getNeighbors() {
         return neighbors;
     }
 
+    public void addNeighbor(Node neighbor) {
+        neighbors.add(neighbor);
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Node otherNode)) {
-            return false;
+        if (obj instanceof Node other) {
+            return this.x == other.x && this.y == other.y;
         }
-
-        return x == otherNode.x && y == otherNode.y;
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int hash = 7;
+        hash = 31 * hash + x;
+        hash = 31 * hash + y;
+        return hash;
     }
 }
