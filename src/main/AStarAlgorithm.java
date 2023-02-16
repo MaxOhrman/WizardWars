@@ -9,7 +9,33 @@ import java.util.Map;
 
 public class AStarAlgorithm {
 
-    public List<Node> astar(Node start, Node goal, Handler handler) {
+    private List<Node> nodes;
+
+    public AStarAlgorithm(ArrayList<GameObject> objects) {
+        nodes = new ArrayList<>();
+        for (GameObject obj : objects) {
+
+            if (!obj.hasCollision) {
+                Node node = new Node((int)obj.getX()*32, (int)obj.getY()*32);
+                nodes.add(node);
+            }
+
+        }
+
+        // Add neighbors to each node
+        for (int i = 0; i < nodes.size(); i++) {
+            Node node1 = nodes.get(i);
+            for (int j = i + 1; j < nodes.size(); j++) {
+                Node node2 = nodes.get(j);
+                if (distanceBetween(node1, node2) == 1.0) {
+                    node1.addNeighbor(node2);
+                }
+            }
+        }
+
+    }
+
+    public List<Node> findPath(Node start, Node goal) {
         // Set up the open and closed sets
         List<Node> openSet = new ArrayList<>();
         openSet.add(start);
@@ -21,15 +47,6 @@ public class AStarAlgorithm {
 
         Map<Node, Double> fScore = new HashMap<>();
         fScore.put(start, heuristicCostEstimate(start, goal));
-
-        ArrayList<GameObject> objects = handler.getObjectArray();
-
-
-        for (GameObject obj : objects) {
-            Node node = new Node((int)obj.getX(), (int)obj.getY());
-            // add the node to the open set
-            openSet.add(node);
-        }
 
         // While there are still nodes in the open set
         while (!openSet.isEmpty()) {
