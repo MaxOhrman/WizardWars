@@ -1,5 +1,6 @@
 package entities;
 
+import main.AStarAlgorithm;
 import main.Handler;
 import main.ID;
 import main.SpriteSheet;
@@ -28,8 +29,9 @@ public abstract class GameObject {
     protected boolean isCreature;
     protected float currentHealth;
     protected float currentMana;
+    protected AStarAlgorithm aStarAlgorithm;
 
-    public GameObject(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler) {
+    public GameObject(double x, double y, double width, double height, ID id, boolean enableCollision, SpriteSheet spriteSheet, Handler handler, AStarAlgorithm aStarAlgo) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -44,6 +46,7 @@ public abstract class GameObject {
         this.maxMana = 100;
         this.currentHealth = maxHealth;
         this.currentMana = maxMana;
+        this.aStarAlgorithm = aStarAlgo;
     }
 
     public abstract void tick();
