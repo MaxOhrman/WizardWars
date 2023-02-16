@@ -16,6 +16,7 @@ public class Game extends Canvas implements Runnable {
     private long lastCheck = 0;
     private boolean isRunning = false;
     private final SpriteSheet spriteSheet;
+    private AStarAlgorithm aStarAlgorithm;
 
     public Game() {
         new GameWindow("A war of wizards", this, 1920, 1080);
@@ -38,8 +39,11 @@ public class Game extends Canvas implements Runnable {
         BufferedImage buffered_sprite_sheet = loader.loadImage("/sprites.png");
         spriteSheet = new SpriteSheet(buffered_sprite_sheet);
 
-        LevelLoader levelLoader = new LevelLoader(handler,spriteSheet,this);
+        LevelLoader levelLoader = new LevelLoader(handler,spriteSheet,this, aStarAlgorithm);
         levelLoader.loadLevel(level_1);
+
+        //Path finding
+        this.aStarAlgorithm = new AStarAlgorithm(handler.getObjectArray());
 
         startGameLoop();
     }
