@@ -35,7 +35,12 @@ public class AStarAlgorithm {
 
     }
 
-    public List<Node> findPath(Node start, Node goal) {
+    public List<Node> findPath(GameObject startObj, GameObject goalObj) {
+
+
+        Node start = new Node((int)startObj.getX()*32, (int)startObj.getY()*32);
+        Node goal = new Node((int)goalObj.getX()*32, (int)goalObj.getY()*32);
+
         // Set up the open and closed sets
         List<Node> openSet = new ArrayList<>();
         openSet.add(start);
